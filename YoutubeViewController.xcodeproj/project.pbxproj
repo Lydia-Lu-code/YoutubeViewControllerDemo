@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00219D702BD624BC007AC84F /* TopButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00219D6F2BD624BC007AC84F /* TopButtonCollectionCell.swift */; };
+		00219D722BD62DF7007AC84F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00219D712BD62DF7007AC84F /* CustomView.swift */; };
 		0063E4D12BBEA5FD0086C0BA /* ShortsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D02BBEA5FD0086C0BA /* ShortsVC.swift */; };
 		0063E4D32BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D22BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift */; };
 		007BB5322BB93A0000431084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5312BB93A0000431084 /* AppDelegate.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00219D6F2BD624BC007AC84F /* TopButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButtonCollectionCell.swift; sourceTree = "<group>"; };
+		00219D712BD62DF7007AC84F /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		0063E4D02BBEA5FD0086C0BA /* ShortsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsVC.swift; sourceTree = "<group>"; };
 		0063E4D22BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsFrameCollectionView.swift; sourceTree = "<group>"; };
 		007BB52E2BB93A0000431084 /* YoutubeViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +82,7 @@
 		007BB5252BB93A0000431084 = {
 			isa = PBXGroup;
 			children = (
+				00219D712BD62DF7007AC84F /* CustomView.swift */,
 				007BB5302BB93A0000431084 /* YoutubeViewController */,
 				007BB52F2BB93A0000431084 /* Products */,
 			);
@@ -110,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				007BB5452BB93CCC00431084 /* HomeTopItemView.swift */,
+				00219D6F2BD624BC007AC84F /* TopButtonCollectionCell.swift */,
 				00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */,
 				00E63AB12BD015930019CB6D /* SearchVC.swift */,
 				0063E4D22BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift */,
@@ -252,9 +258,11 @@
 				008551D92BC0178500DA3913 /* MainTabBarController.swift in Sources */,
 				007BB5362BB93A0000431084 /* HomeVC.swift in Sources */,
 				00E63AA62BCCDA4C0019CB6D /* MenuVC.swift in Sources */,
+				00219D722BD62DF7007AC84F /* CustomView.swift in Sources */,
 				007BB5322BB93A0000431084 /* AppDelegate.swift in Sources */,
 				007BB54C2BBB01F100431084 /* ShortsFrameView.swift in Sources */,
 				007BB5482BB952F800431084 /* ButtonCollectionViewCell.swift in Sources */,
+				00219D702BD624BC007AC84F /* TopButtonCollectionCell.swift in Sources */,
 				00E63AB02BD015840019CB6D /* NotificationLogVC.swift in Sources */,
 				007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */,
 				008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */,
