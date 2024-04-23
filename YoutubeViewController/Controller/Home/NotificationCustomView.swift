@@ -1,12 +1,12 @@
 import UIKit
 
-class CustomView: UIView {
+class NotificationCustomView: UIView {
     
     private let leftImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .center
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .yellow
+//        imageView.backgroundColor = .yellow
         return imageView
     }()
     
@@ -26,19 +26,24 @@ class CustomView: UIView {
     
     private let actionButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Button", for: .normal)
+        let title = "啟用通知功能"
+        button.setTitle(title, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .blue
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        
+        let width = title.width(withConstrainedHeight: 50, font: UIFont.systemFont(ofSize: 16, weight: .semibold)) + 20 // 加上一些額外的間距
+        button.widthAnchor.constraint(equalToConstant: width).isActive = true
         return button
     }()
     
     private let extraButton: UIButton = {
         let button = UIButton()
         button.setTitle("X", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .green
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         return button
@@ -94,8 +99,8 @@ class CustomView: UIView {
             extraButton.topAnchor.constraint(equalTo: topAnchor),
         ])
             // 計算 customView 的高度，等於最下面的按鈕元件的高度 + 20
-            let buttonHeight: CGFloat = 50
-            let customViewHeight = buttonHeight + 20
+            let buttonHeight: CGFloat = 40
+            let customViewHeight = buttonHeight + 60
             NSLayoutConstraint.activate([
                 heightAnchor.constraint(equalToConstant: customViewHeight)
             

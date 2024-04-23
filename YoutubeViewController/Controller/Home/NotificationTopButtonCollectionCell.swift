@@ -1,13 +1,15 @@
 import UIKit
 
-class TopButtonCollectionCell: UICollectionViewCell {
+class NotificationTopButtonCollectionCell: UICollectionViewCell {
 
+    
     private let button: UIButton = {
         let button = UIButton()
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 15
         button.clipsToBounds = true
+
         return button
     }()
 
@@ -15,6 +17,8 @@ class TopButtonCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: contentView.topAnchor),
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -37,4 +41,6 @@ class TopButtonCollectionCell: UICollectionViewCell {
         button.setTitle(nil, for: .normal)
         button.backgroundColor = nil
     }
+
+    
 }
