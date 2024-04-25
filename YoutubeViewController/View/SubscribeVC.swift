@@ -149,7 +149,7 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
                 subscribeSecItemView.topAnchor.constraint(equalTo: homeTopItemView.bottomAnchor), // 將 subscribeSecItemView 的 topAnchor 設置為 homeTopItemView 的 bottomAnchor
                 subscribeSecItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 subscribeSecItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                subscribeSecItemView.heightAnchor.constraint(equalToConstant: 75), // 根據需要設置高度
+                subscribeSecItemView.heightAnchor.constraint(equalToConstant: 90), // 根據需要設置高度
 
                 
                 collectionView.topAnchor.constraint(equalTo: subscribeSecItemView.bottomAnchor),
