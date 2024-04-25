@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ShorstBottomView: UIView {
+class ShortsBtnView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupEmojiButtonViews()
+        setupEmojiBtnViews()
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +58,8 @@ class ShorstBottomView: UIView {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints  = false
         lbl.backgroundColor = .orange
-        lbl.text = ".txt"
+        lbl.text = ".txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt "
+        lbl.numberOfLines = 2
         lbl.textColor = .white // 修改此行
         return lbl
     }()
@@ -70,6 +71,7 @@ class ShorstBottomView: UIView {
         btn.backgroundColor = .red
         btn.setTitle("music", for: .normal)
         btn.setTitleColor(.white, for: .normal)
+        btn.contentHorizontalAlignment = .left // 文字靠左對齊
         return btn
     }()
     
@@ -85,7 +87,7 @@ class ShorstBottomView: UIView {
          return stackView
      }()
  
-    private func setupEmojiButtonViews() {
+    private func setupEmojiBtnViews() {
         
         self.addSubview(stackView)
         
@@ -93,7 +95,7 @@ class ShorstBottomView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 130) // 設置總高度為 130
+            stackView.heightAnchor.constraint(equalToConstant: 140) // 設置總高度為 140
 
         ])
         
@@ -110,6 +112,8 @@ class ShorstBottomView: UIView {
         // 設置 imageView 的 contentMode
         imageView.contentMode = .scaleAspectFit
         
+        
+
     }
     
 

@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 
-class SubscribeTopItemView: UIView {
+class SubscribeSecItemView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)

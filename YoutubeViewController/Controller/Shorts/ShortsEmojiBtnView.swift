@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-class EmojiButtonView: UIView {
+class ShortsEmojiBtnView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,7 +20,7 @@ class EmojiButtonView: UIView {
     }
     
     private func setupEmojiButtonViews() {
-        backgroundColor = .gray
+//        backgroundColor = .gray
         
         // 创建垂直的 stackView
         let stackView = UIStackView()
@@ -41,7 +41,7 @@ class EmojiButtonView: UIView {
         for i in 1...6 {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.backgroundColor = .yellow
+            button.backgroundColor = .clear
             button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             
             // 添加 emoji 和文字到按鈕的標題中，並在它們之間換行
