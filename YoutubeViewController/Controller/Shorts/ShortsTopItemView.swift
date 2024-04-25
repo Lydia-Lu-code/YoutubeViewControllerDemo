@@ -12,7 +12,7 @@ class ShortsTopItemView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.backgroundColor = .clear
+//        self.backgroundColor = .clear
         setupCustomViewLayout()
     }
 
@@ -108,7 +108,7 @@ class ShortsTopItemView: UIView {
             stackViewTop.topAnchor.constraint(equalTo: self.topAnchor),
             stackViewTop.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackViewTop.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackViewTop.heightAnchor.constraint(equalToConstant: 70)
+            stackViewTop.heightAnchor.constraint(equalToConstant: 40)
             
         ])
         
@@ -118,7 +118,7 @@ class ShortsTopItemView: UIView {
             stackViewBottom.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackViewBottom.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             stackViewBottom.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackViewBottom.heightAnchor.constraint(equalToConstant: 70)
+            stackViewBottom.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         // 设置 buttonLeft 的约束

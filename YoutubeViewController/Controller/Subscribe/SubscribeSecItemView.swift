@@ -13,7 +13,7 @@ class SubscribeSecItemView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.backgroundColor = .black
+//        self.backgroundColor = .black
         setupScrollView()
         setupButtons()
         setupRightButton()
@@ -25,23 +25,36 @@ class SubscribeSecItemView: UIView {
     
     let buttons: [UIButton] = {
         var buttonArray = [UIButton]()
-        for i in 1...50 {
+        for i in 1...20 {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
             button.backgroundColor = .clear
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             
-            // 添加 emoji 和文字到按鈕的標題中，並在它們之間換行
-            let emoji = "🥳"
-            let title = "\(emoji)\nEmoji \(i)"
+            // 設置圖片和文字的內容
+            let originalImage = UIImage(named: "image2")
+            let imageSize = CGSize(width: 65, height: 65) // 設置圖片大小
+            let roundedImage = originalImage?.roundedImage(withSize: imageSize)
+            button.setImage(roundedImage, for: .normal)
+            
+            let title = "Emoji \(i)"
             button.setTitle(title, for: .normal)
-            button.titleLabel?.numberOfLines = 2
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             button.titleLabel?.textAlignment = .center
+            
+            // 設置圖片和文字的排列方式
+            button.contentHorizontalAlignment = .center
+            button.contentVerticalAlignment = .top
+
             
             buttonArray.append(button)
         }
         return buttonArray
     }()
+
+    
+
+    
+
 
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -72,6 +85,7 @@ class SubscribeSecItemView: UIView {
     }()
     
     private func setupScrollView() {
+        
         self.addSubview(scrollView)
         
         // 添加 scrollView 到父視圖
@@ -94,30 +108,26 @@ class SubscribeSecItemView: UIView {
             stackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
 
         ])
+        
+        
     }
     
     private func setupButtons() {
-        // 設置按鈕的尺寸約束
         for button in buttons {
-            NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: 60),
-                button.heightAnchor.constraint(equalToConstant: 60)
-            ])
+            button.titleLabel?.numberOfLines = 2 // 允許換行
+            button.titleLabel?.textAlignment = .center // 文字置中
             
-            // 設置文字尺寸
-            if let titleLabel = button.titleLabel {
-                titleLabel.font = UIFont.systemFont(ofSize: 20)
-                titleLabel.numberOfLines = 2
-                titleLabel.textAlignment = .center
-            }
+            // 將按鈕添加到 stackView 中
+            stackView.addArrangedSubview(button)
         }
     }
-    
+
+
     private func setupRightButton() {
         self.addSubview(rightButton)
         
         NSLayoutConstraint.activate([
-            rightButton.widthAnchor.constraint(equalToConstant: 60),
+            rightButton.widthAnchor.constraint(equalToConstant: 65),
             rightButton.heightAnchor.constraint(equalToConstant: 80),
             rightButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
             rightButton.topAnchor.constraint(equalTo: self.topAnchor)
@@ -125,3 +135,15 @@ class SubscribeSecItemView: UIView {
     }
    
 }
+extension UIImage {
+    func roundedImage(withSize size: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { context in
+            let roundedRect = CGRect(origin: .zero, size: size)
+            UIBezierPath(roundedRect: roundedRect, cornerRadius: size.width/2).addClip()
+            self.draw(in: roundedRect)
+        }
+    }
+}
+
+

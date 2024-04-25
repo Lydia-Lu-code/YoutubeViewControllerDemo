@@ -2,12 +2,13 @@
 import UIKit
 
 class NotificationLogVC: UIViewController {
+
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal // 水平滾動
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
+//        collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false // 隱藏水平滾動條
         return collectionView
     }()
@@ -16,7 +17,7 @@ class NotificationLogVC: UIViewController {
     
     private let customView: NotificationCustomView = {
         let view = NotificationCustomView()
-        view.backgroundColor = .clear
+//        view.backgroundColor = .clear
         // 設置自定義視圖的其他屬性
         return view
     }()
@@ -29,16 +30,24 @@ class NotificationLogVC: UIViewController {
     
     let buttonTitles = ["﻿全部","「提及」的通知"]
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        view.backgroundColor = .black
+
+         // 設置標題
+         title = "通知"
+
         
         collectionView.delegate = self
         collectionView.dataSource = self
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
 
+
+        
         // 添加 collectionView 到 ViewController 的 view 中
         view.addSubview(collectionView)
         
@@ -52,12 +61,12 @@ class NotificationLogVC: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         customView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
+
         NSLayoutConstraint.activate([
-            // collectionView 約束
             
+    
+            
+            // collectionView 約束
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -74,6 +83,8 @@ class NotificationLogVC: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+
+
         ])
         
         // Configure the CustomView
@@ -88,7 +99,51 @@ class NotificationLogVC: UIViewController {
         
         // 註冊 tableView 的 cell
         tableView.register(NotificationTableViewCell.self, forCellReuseIdentifier: "NotificationTableViewCell")
+        
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonTapped))
+        let addButton = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addButtonTapped))
+        let moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonTapped))
+        navigationItem.rightBarButtonItems = [moreButton, addButton, searchButton]
+
     }
+    
+    @objc func searchButtonTapped() {
+        print("實現搜索按鈕的功能")
+    }
+
+    @objc func addButtonTapped() {
+        print("實現添加按鈕的功能")
+    }
+    
+    @objc func moreButtonTapped() {
+        print("實現更多按鈕的功能")
+    }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // 根據當前的界面風格設置背景色
+        if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = .black
+        } else {
+            view.backgroundColor = .white
+        }
+    }
+//    // 在 NotificationLogVC 類中添加以下方法
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        
+//        // 檢查當前的外觀模式
+//        let isDarkMode = traitCollection.userInterfaceStyle == .dark
+//        
+//        // 設置標題文字顏色為淺色模式下為黑色，深色模式下為白色
+//        let titleColor: UIColor = isDarkMode ? .white : .black
+//        let titleAttributes: [NSAttributedString.Key: Any] = [
+//            .foregroundColor: titleColor,
+//            .font: UIFont.systemFont(ofSize: 20, weight: .bold) // 設置標題的字體
+//        ]
+//        navigationController?.navigationBar.titleTextAttributes = titleAttributes
+//    }
+
     
     // MARK: - UICollectionViewDataSource
 }
@@ -158,12 +213,12 @@ extension NotificationLogVC: UITableViewDataSource, UITableViewDelegate {
     
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
             let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 0))
-            headerView.backgroundColor = .clear
+//            headerView.backgroundColor = .clear
     
             let titleLabel = UILabel(frame: CGRect(x: 10, y: 10, width: tableView.frame.width - 30, height: 20))
             
             titleLabel.text = (section == 0) ? "本週" : "較舊"
-            titleLabel.textColor = UIColor.white
+//            titleLabel.textColor = UIColor.white
     
             headerView.addSubview(titleLabel)
     

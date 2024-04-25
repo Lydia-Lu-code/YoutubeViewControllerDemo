@@ -11,23 +11,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         // 创建一个标签栏控制器作为应用程序的根视图控制器
-        let tabBarController = MainTabBarController()
+        let mainTabBarController = MainTabBarController()
 
         let window = UIWindow(windowScene: windowScene)
-        // 创建一个导航控制器，并将 ContainerViewController 设置为根视图控制器
-        let navigationController = UINavigationController(rootViewController: tabBarController)
+        // 创建一个导航控制器，并将 tabBarController 设置为根视图控制器
+        let navigationController = UINavigationController(rootViewController: mainTabBarController)
 
-        // 创建一个新的窗口并将标签栏控制器设置为根视图控制器
-        window.rootViewController = UINavigationController(rootViewController: tabBarController)
+        // 將 tabBarController 設置為 window 的根視圖控制器
+        window.rootViewController = navigationController
         self.window = window
         window.makeKeyAndVisible()
+        
+
+        
     }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

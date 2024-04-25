@@ -9,12 +9,9 @@ protocol HomeVCDelegate: AnyObject {
 
 class HomeVC: UIViewController,ButtonCollectionCellDelegate {
 
-
-    
-    
     weak var delegate: HomeVCDelegate?
     
-    let buttonTitles = ["emoji", "﻿全部", "﻿音樂", "﻿遊戲", "﻿合輯", "﻿直播中", "﻿動畫", "﻿寵物", "﻿最新上傳", "讓你耳目一新的影片", "﻿提供意見"]
+    let buttonTitles = ["﻿ 📍﻿ ", "﻿全部", "﻿音樂", "﻿遊戲", "﻿合輯", "﻿直播中", "﻿動畫", "﻿寵物", "﻿最新上傳", "讓你耳目一新的影片", "﻿提供意見"]
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -33,24 +30,36 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
             layout.scrollDirection = .horizontal
             layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.backgroundColor = .clear
+//            collectionView.backgroundColor = .clear
             collectionView.showsHorizontalScrollIndicator = false
 
             collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "ButtonCell")
             return collectionView
         }()
     
+    
+    // 添加 imageview
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = UIColor.red // 將背景色設定為紅色
+        return imageView
+    }()
+    
+    
     let homeTopItemView = HomeTopItemView()
     let videoFrameView = VideoFrameView()
     let shortsFrameCollectionView = ShortsFrameCollectionView()
     var videoFrameViews = [VideoFrameView]()
-//    var videoFrameView2 = VideoFrameView()
     var menuViewController: MenuVC?
     var notificationLogViewController = NotificationLogVC()
-    
+    let videoFrameView2 = VideoFrameView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         scrollView.isScrollEnabled = true
         setupViews()
         setLayout()
@@ -74,13 +83,13 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
         contentView.addSubview(homeTopItemView)
         contentView.addSubview(collectionView)
         contentView.addSubview(videoFrameView)
+        contentView.addSubview(imageView)
         contentView.addSubview(shortsFrameCollectionView)
-//        contentView.addSubview(videoFrameView2)
         collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
-
-
     }
 
+
+    
     private func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +97,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         videoFrameView.translatesAutoresizingMaskIntoConstraints = false
         shortsFrameCollectionView.translatesAutoresizingMaskIntoConstraints = false
-//        videoFrameView2.translatesAutoresizingMaskIntoConstraints = false
         
         // 计算所有按钮宽度的总和
         var totalWidth: CGFloat = 0
@@ -98,6 +106,9 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
             totalWidth += size.width + 20 // 加上额外的空间
         }
         
+        // 計算15個 videoFrameView2 的高度總和
+        let videoFrameView2TotalHeight: CGFloat = 15 * 280 // 假設每個 videoFrameView2 的高度是 280
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -106,34 +117,64 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
 
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.bottomAnchor.constraint(equalTo: shortsFrameCollectionView.bottomAnchor), // 更新這裡
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 4500), //設定View的長度
-            
+
             homeTopItemView.topAnchor.constraint(equalTo: contentView.topAnchor),
             homeTopItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             homeTopItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             homeTopItemView.heightAnchor.constraint(equalToConstant: 60),
-              
+
             collectionView.topAnchor.constraint(equalTo: homeTopItemView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 60),
-            
+
             videoFrameView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
             videoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             videoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             videoFrameView.heightAnchor.constraint(equalToConstant: 280),
-            
-            shortsFrameCollectionView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
+
+            // imageView 布局
+            imageView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 70), // 設定高度為 160
+
+            shortsFrameCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             shortsFrameCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             shortsFrameCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            shortsFrameCollectionView.heightAnchor.constraint(equalToConstant: 595)
+            shortsFrameCollectionView.heightAnchor.constraint(equalToConstant: 600),
+            
         ])
+        setupVideoFrameViewsLayout()
+        
+        // 設定 scrollView 的 contentSize
+        let contentHeight = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + videoFrameView2TotalHeight
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: contentHeight)
+    }
+    
+    private func setupVideoFrameViewsLayout() {
+        var previousVideoFrameView: UIView = shortsFrameCollectionView
+
+        for _ in 0..<15 {
+            let videoFrame = VideoFrameView()
+            contentView.addSubview(videoFrame)
+            videoFrame.translatesAutoresizingMaskIntoConstraints = false
+
+            NSLayoutConstraint.activate([
+                videoFrame.topAnchor.constraint(equalTo: previousVideoFrameView.bottomAnchor),
+                videoFrame.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                videoFrame.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                videoFrame.heightAnchor.constraint(equalToConstant: 280)
+            ])
+
+            previousVideoFrameView = videoFrame
+        }
+
+        
     }
 }
-
-
 
 extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -166,7 +207,7 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
     @objc private func buttonTapped(_ sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
         
-        if title == "emoji" {
+        if title == "﻿ 📍﻿ " {
             let menuVC = MenuVC()
             self.navigationController?.pushViewController(menuVC, animated: true)
         } else {
@@ -190,13 +231,6 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
     }
 }
 
-//extension String {
-//    func widthOfString(usingFont font: UIFont) -> CGFloat {
-//        let fontAttributes = [NSAttributedString.Key.font: font]
-//        let size = self.size(withAttributes: fontAttributes)
-//        return size.width
-//    }
-//}
 
 
 

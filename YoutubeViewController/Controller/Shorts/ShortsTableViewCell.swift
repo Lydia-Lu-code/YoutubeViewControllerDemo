@@ -9,40 +9,43 @@ import UIKit
 
 class ShortsTableViewCell: UITableViewCell {
     
-    let emojiButtonView = EmojiButtonView()
-    let shortsBottomView = ShortsBottomView()
-    var videoContent: String?
+    let emojiBtnView = ShortsEmojiBtnView()
+    let shortsBtnView = ShortsBtnView()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupViews() // 設定視圖
-
+        setupViews()
     }
-    
-    
-    private func setupViews() {
-        view.addSubview(emojiButtonView)
-        view.addSubview(shortsBottomView)
-        
-        NSLayoutConstraint.activate([
-            emojiButtonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emojiButtonView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90)
-        ])
 
-        NSLayoutConstraint.activate([
-            shortsBottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            shortsBottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -220),
-            shortsBottomView.widthAnchor.constraint(equalToConstant: 200), // 固定寬度為200
-        ])
-
-        
-        setLayout()  // 設定佈局
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
+
+
+func setupViews() {
+    contentView.addSubview(emojiBtnView)
+    contentView.addSubview(shortsBtnView)
+
+    NSLayoutConstraint.activate([
+        emojiBtnView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+        emojiBtnView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
+    ])
+
+    NSLayoutConstraint.activate([
+        shortsBtnView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+        shortsBtnView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150),
+        shortsBtnView.widthAnchor.constraint(equalToConstant: 200), // 固定寬度為200
+    ])
+
+    setLayout()  // 設定佈局
+}
+
     private func setLayout() {
-        // 在這裡可以設定其他視圖的佈局
-        emojiButtonView.translatesAutoresizingMaskIntoConstraints = false
-        shortsBottomView.translatesAutoresizingMaskIntoConstraints = false
+        emojiBtnView.translatesAutoresizingMaskIntoConstraints = false
+        shortsBtnView.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+
 }

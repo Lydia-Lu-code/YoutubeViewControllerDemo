@@ -1,3 +1,4 @@
+
 //
 //  AutoLayoutHelper.swift
 //  YoutubeViewController
@@ -10,22 +11,10 @@ import Foundation
 
 class HomeTopItemView:UIView {
 
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        self.backgroundColor = .clear
-        setupCustomViewLayout()
-    }
-
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
     lazy var leftImageView :UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
+//        imgView.image = UIImage(named: "logo") // 設置左側圖片
         imgView.backgroundColor = UIColor.red
         return imgView
     }()
@@ -34,7 +23,7 @@ class HomeTopItemView:UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(systemName: "display.2"), for: .normal) // 使用 SF Symbol
-        btn.backgroundColor = .clear // 設置背景色為透明
+//        btn.backgroundColor = .clear // 設置背景色為透明
         btn.tintColor = .systemBlue // 設置圖標顏色
         return btn
     }()
@@ -43,7 +32,7 @@ class HomeTopItemView:UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(systemName: "bell"), for: .normal) // 使用 SF Symbol
-        btn.backgroundColor = .clear // 設置背景色為透明
+//        btn.backgroundColor = .clear // 設置背景色為透明
         btn.tintColor = .systemBlue // 設置圖標顏色
         return btn
     }()
@@ -52,7 +41,7 @@ class HomeTopItemView:UIView {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(systemName: "magnifyingglass"), for: .normal) // 使用 SF Symbol
-        btn.backgroundColor = .clear // 設置背景色為透明
+//        btn.backgroundColor = .clear // 設置背景色為透明
         btn.tintColor = .systemBlue // 設置圖標顏色
         return btn
     }()
@@ -68,31 +57,57 @@ class HomeTopItemView:UIView {
         stackView.distribution = .fillEqually
         return stackView
     }()
+    
+
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+//        self.backgroundColor = .clear
+        setupCustomViewLayout()
+        
+        setupNavigationBar()
+    }
+
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
 
 
   
     private func setupCustomViewLayout() {
-        // 添加约束
+
+
+        
         self.addSubview(leftImageView)
         self.addSubview(stackView)
         
         buttonLeft.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         buttonMid.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         buttonRight.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        NSLayoutConstraint.activate([
         
+        // 設置 leftImageView 的約束
+        NSLayoutConstraint.activate([
+            // leftImageView 在左上角
             leftImageView.leftAnchor.constraint(equalTo: self.leftAnchor),
             leftImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            // 設置固定寬度和高度
             leftImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3),
-            leftImageView.heightAnchor.constraint(equalTo: self.heightAnchor), // 设置leftImageView高度与父视图相同
-            
-            // StackView约束
+            leftImageView.heightAnchor.constraint(equalTo: self.heightAnchor)
+        ])
+
+        // 設置 stackView 的約束
+        NSLayoutConstraint.activate([
+            // stackView 在右上角
             stackView.rightAnchor.constraint(equalTo: self.rightAnchor),
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4),
-            
+            stackView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4)
         ])
+
 
         // 設置按鈕的垂直對齊方式為置中
         buttonLeft.contentVerticalAlignment = .center
@@ -104,19 +119,52 @@ class HomeTopItemView:UIView {
         buttonMid.contentHorizontalAlignment = .center
         buttonRight.contentHorizontalAlignment = .center
 
+//        // 將按鈕設置到 UIBarButtonItem 中
+//        let leftButtonItem = UIBarButtonItem(customView: buttonLeft)
+//        let midButtonItem = UIBarButtonItem(customView: buttonMid)
+//        let rightButtonItem = UIBarButtonItem(customView: buttonRight)
+//
+//        // 設置左右 Bar Button Items
+//        if let navigationController = findNavigationController() {
+//            navigationController.navigationItem.leftBarButtonItems = [leftButtonItem]
+//            navigationController.navigationItem.rightBarButtonItems = [midButtonItem, rightButtonItem]
+//        }
+        
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
         switch sender {
         case buttonLeft:
+            print("Left button tapped")
             presentAlertController(title: "﻿選取裝置", message: nil)
         case buttonMid:
+            print("Middle button tapped")
             navigateToNotificationLogViewController()
         case buttonRight:
+            print("Right button tapped")
             presentSearchViewController()
         default:
             break
         }
+    }
+    
+    private func setupNavigationBar() {
+        // 將按鈕設置到 UIBarButtonItem 中
+        let leftButtonItem = UIBarButtonItem(customView: leftImageView)
+        let rightButtonItem = UIBarButtonItem(customView: buttonLeft)
+
+
+    }
+    
+    private func findNavigationController() -> UINavigationController? {
+        var responder: UIResponder? = self
+        while let nextResponder = responder?.next {
+            if let navigationController = nextResponder as? UINavigationController {
+                return navigationController
+            }
+            responder = nextResponder
+        }
+        return nil
     }
 
     private func presentAlertController(title: String, message: String?) {

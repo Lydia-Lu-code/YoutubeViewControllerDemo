@@ -28,7 +28,7 @@ class ShortsBtnView: UIView {
     let accountButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .red
+//        btn.backgroundColor = .red
         btn.setTitle("account", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         return btn
@@ -37,7 +37,7 @@ class ShortsBtnView: UIView {
     let subscriptionButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .red
+//        btn.backgroundColor = .red
         btn.setTitle("訂閱", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         return btn
@@ -57,7 +57,7 @@ class ShortsBtnView: UIView {
     let txtLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints  = false
-        lbl.backgroundColor = .orange
+//        lbl.backgroundColor = .orange
         lbl.text = ".txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt "
         lbl.numberOfLines = 2
         lbl.textColor = .white // 修改此行
@@ -68,7 +68,7 @@ class ShortsBtnView: UIView {
     let musicButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.backgroundColor = .red
+//        btn.backgroundColor = .red
         btn.setTitle("music", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.contentHorizontalAlignment = .left // 文字靠左對齊

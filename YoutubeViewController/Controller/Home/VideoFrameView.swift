@@ -7,7 +7,7 @@ class VideoFrameView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.backgroundColor = .yellow
+//        self.backgroundColor = .yellow
         setupCustomVideoFrameViewLayout()
     }
 
@@ -22,42 +22,47 @@ class VideoFrameView: UIView {
     lazy var videoView : UIView = {
         let vidView = UIView()
         vidView.translatesAutoresizingMaskIntoConstraints = false
-        vidView.backgroundColor = .green
+        vidView.backgroundColor = .lightGray
         return vidView
     }()
     
     let imageView :UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.backgroundColor = .red
+        imgView.backgroundColor = .darkGray
         return imgView
     }()
     
     let labelMidTitle : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints  = false
-        lbl.backgroundColor = .orange
+//        lbl.backgroundColor = .orange
+        lbl.text = "Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ " // 這裡設定了一個範例文字
+        lbl.numberOfLines = 2 // 兩行文字
         return lbl
     }()
     
     let labelMidOther : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints  = false
-        lbl.backgroundColor = .blue
+//        lbl.backgroundColor = .blue
+        lbl.text = "Other" // 這裡設定了一個範例文字
         return lbl
     }()
     
     let buttonRight : UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints  = false
-        btn.backgroundColor = .brown
+        btn.backgroundColor = .clear
+        btn.setImage(UIImage(systemName: "ellipsis"), for: .normal) // 使用三個點符號作為示意圖
+        btn.tintColor = .lightGray // 設定符號顏色
+
         return btn
     }()
     
     lazy var videoFrameView : UIView = {
         let vidFrameView = UIView()
         vidFrameView.translatesAutoresizingMaskIntoConstraints = false
-        vidFrameView.backgroundColor = UIColor.red
         vidFrameView.addSubview(videoView)
         vidFrameView.addSubview(imageView)
         vidFrameView.addSubview(labelMidTitle)
@@ -115,8 +120,8 @@ class VideoFrameView: UIView {
             
             // labelMidOther 的约束
             labelMidOther.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5), // labelMidOther 左边与 imageView 右边相距 5 点
-            labelMidOther.topAnchor.constraint(equalTo: self.topAnchor, constant: 255), // labelMidOther 顶部与 labelMidTitle 底部相距 0 点
-            labelMidOther.heightAnchor.constraint(equalToConstant: 30), // labelMidOther 高度设为 55 点
+            labelMidOther.topAnchor.constraint(equalTo: self.topAnchor, constant: 240), // labelMidOther 顶部与 labelMidTitle 底部相距 0 点
+            labelMidOther.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0), // 底部固定在 VideoFrameView 的底部並設置間距為 20
             labelMidOther.widthAnchor.constraint(equalTo: videoView.widthAnchor, constant: -130)
 
         ])

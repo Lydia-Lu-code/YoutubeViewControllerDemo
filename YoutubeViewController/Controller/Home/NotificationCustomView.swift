@@ -43,7 +43,7 @@ class NotificationCustomView: UIView {
         let button = UIButton()
         button.setTitle("X", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .clear
+//        button.backgroundColor = .clear
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
         return button
@@ -52,6 +52,7 @@ class NotificationCustomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -113,5 +114,16 @@ class NotificationCustomView: UIView {
         label2.text = text2
         actionButton.setTitle(buttonText, for: .normal)
     }
+    
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        
+//        // 根據當前的界面風格設置背景色
+//        if traitCollection.userInterfaceStyle == .dark {
+//            backgroundColor = .black
+//        } else {
+//            backgroundColor = .clear
+//        }
+//    }
 }
 

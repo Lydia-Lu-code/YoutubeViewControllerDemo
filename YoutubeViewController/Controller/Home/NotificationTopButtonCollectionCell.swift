@@ -34,12 +34,14 @@ class NotificationTopButtonCollectionCell: UICollectionViewCell {
     func configure(title: String, backgroundColor: UIColor) {
         button.setTitle(title, for: .normal)
         button.backgroundColor = backgroundColor
+        
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         button.setTitle(nil, for: .normal)
         button.backgroundColor = nil
+//        button.backgroundColor = .yellow
     }
 
     

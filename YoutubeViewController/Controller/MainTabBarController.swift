@@ -9,18 +9,20 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
+
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         setupViewControllers()
 
     }
     
-    
-    
+
     private func setupViewControllers() {
         let homeVC = HomeVC()
-        let shortsVC = ShortsVC()
+        let shortsVC = ShortsTableViewController()
         let subscribeVC = SubscribeVC()
         let yourContentVC = YourContentVC()
         let addVC = AddVC()
