@@ -27,6 +27,9 @@ class ShortsTableViewCell: UITableViewCell {
 func setupViews() {
     contentView.addSubview(emojiBtnView)
     contentView.addSubview(shortsBtnView)
+    
+    emojiBtnView.translatesAutoresizingMaskIntoConstraints = false
+    shortsBtnView.translatesAutoresizingMaskIntoConstraints = false
 
     NSLayoutConstraint.activate([
         emojiBtnView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -39,13 +42,9 @@ func setupViews() {
         shortsBtnView.widthAnchor.constraint(equalToConstant: 200), // 固定寬度為200
     ])
 
-    setLayout()  // 設定佈局
 }
 
-    private func setLayout() {
-        emojiBtnView.translatesAutoresizingMaskIntoConstraints = false
-        shortsBtnView.translatesAutoresizingMaskIntoConstraints = false
-    }
+
     
 
 }

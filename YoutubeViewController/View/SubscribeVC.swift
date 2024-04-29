@@ -54,7 +54,7 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
         
 
         
-        let homeTopItemView = HomeTopItemView()
+//        let homeTopItemView = HomeTopItemView()
         let subscribeSecItemView = SubscribeSecItemView()
         let videoFrameView = VideoFrameView()
         let subscribeHoriCollectionView = SubscribeHoriCollectionView(frame: CGRect.zero)
@@ -75,14 +75,100 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             collectionView.delegate = self
             collectionView.dataSource = self
             
+            // 固定寬度，避免切換模式時位移
+            let fixedWidth = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+            fixedWidth.width = 14 // 調整寬度，以適應您的設計
             
-//            // 在這裡設置 subscribeSecItemView 的高度
-//            let buttonHeight: CGFloat = 65 // 按鈕圖片的高度
-//            let titleHeight: CGFloat = 15 // 標題的高度
-//            let totalButtonHeight = buttonHeight + titleHeight // 按鈕和標題的總高度
-//            
-//            // 設置 subscribeSecItemView 的高度，讓它根據按鈕內容自動調整高度
-//            subscribeSecItemView.heightAnchor.constraint(equalToConstant: totalButtonHeight).isActive = true
+            let btn1 = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(topButtonTapped))
+            let btn2 = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(topButtonTapped))
+            let btn3 = UIBarButtonItem(image: UIImage(systemName: "display.2"), style: .plain, target: self, action: #selector(topButtonTapped))
+
+            
+            // 将按钮添加到导航栏上
+            self.navigationItem.setRightBarButtonItems([btn1, btn2, btn3], animated: true)
+
+
+    }
+
+        @objc func topButtonTapped(_ sender: UIBarButtonItem) {
+            switch sender {
+            case navigationItem.rightBarButtonItems?[2]: // buttonLeft
+                print("Home Left button tapped")
+                presentAlertController(title: "﻿選取裝置", message: nil)
+            case navigationItem.rightBarButtonItems?[1]: // buttonMid
+                print("Home Middle button tapped")
+                navigateToNotificationLogViewController()
+            case navigationItem.rightBarButtonItems?[0]: // buttonRight
+                print("Home Right button tapped")
+                presentSearchViewController()
+            default:
+                break
+            }
+        }
+        
+        func presentSearchViewController() {
+            // 在這裡實現您的 presentSearchViewController 方法
+            // 例如，可以是簡單的彈出搜索視圖控制器的代碼
+            let searchVC = SearchVC() // 假設 SearchViewController 是您的搜索視圖控制器類
+            self.present(searchVC, animated: true, completion: nil)
+        }
+        
+        private func presentAlertController(title: String, message: String?) {
+            guard let viewController = findViewController() else {
+                print("無法找到視圖控制器")
+                return
+            }
+
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+
+            // 設置標題文字左對齊
+            let titleParagraphStyle = NSMutableParagraphStyle()
+            titleParagraphStyle.alignment = NSTextAlignment.left
+            let titleAttributedString = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.paragraphStyle: titleParagraphStyle])
+            alertController.setValue(titleAttributedString, forKey: "attributedTitle")
+
+            alertController.addAction(UIAlertAction(title: "透過電視代碼連結", style: .default, handler: { (_) in
+                // buttonLeft 的處理代碼
+            }))
+
+            alertController.addAction(UIAlertAction(title: "了解詳情", style: .default, handler: { (_) in
+                // buttonMid 的處理代碼
+            }))
+
+            // 設置選項文字靠左對齊
+            for action in alertController.actions {
+                action.setValue(NSTextAlignment.left.rawValue, forKey: "titleTextAlignment")
+            }
+
+            viewController.present(alertController, animated: true, completion: nil)
+        }
+
+        private func navigateToNotificationLogViewController() {
+            guard let viewController = findViewController() else {
+                print("無法找到視圖控制器")
+                return
+            }
+            
+            let notificationLogVC = NotificationLogVC()
+            notificationLogVC.title = "通知"
+            viewController.navigationController?.pushViewController(notificationLogVC, animated: true)
+        }
+
+        private func findViewController() -> UIViewController? {
+            if let viewController = self.next as? UIViewController {
+                return viewController
+            } else {
+                var nextResponder = self.next
+                while let responder = nextResponder {
+                    if let viewController = responder as? UIViewController {
+                        return viewController
+                    }
+                    nextResponder = responder.next
+                }
+            }
+            return nil
+        
+        
 
         }
         
@@ -96,7 +182,7 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
         private func setupViews() {
             view.addSubview(scrollView)
             scrollView.addSubview(contentView)
-            contentView.addSubview(homeTopItemView)
+//            contentView.addSubview(homeTopItemView)
             contentView.addSubview(subscribeSecItemView)
             contentView.addSubview(collectionView)
             contentView.addSubview(videoFrameView)
@@ -111,7 +197,7 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
         private func setLayout() {
             scrollView.translatesAutoresizingMaskIntoConstraints = false
             contentView.translatesAutoresizingMaskIntoConstraints = false
-            homeTopItemView.translatesAutoresizingMaskIntoConstraints = false
+//            homeTopItemView.translatesAutoresizingMaskIntoConstraints = false
             subscribeSecItemView.translatesAutoresizingMaskIntoConstraints = false
             collectionView.translatesAutoresizingMaskIntoConstraints = false
             videoFrameView.translatesAutoresizingMaskIntoConstraints = false
@@ -139,14 +225,9 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
                 contentView.bottomAnchor.constraint(equalTo: subscribeHoriCollectionView.bottomAnchor), // 更新這裡
                 contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-                homeTopItemView.topAnchor.constraint(equalTo: contentView.topAnchor),
-                homeTopItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                homeTopItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                homeTopItemView.heightAnchor.constraint(equalToConstant: 60),
 
-                
 //                subscribeSecItemView
-                subscribeSecItemView.topAnchor.constraint(equalTo: homeTopItemView.bottomAnchor), // 將 subscribeSecItemView 的 topAnchor 設置為 homeTopItemView 的 bottomAnchor
+                subscribeSecItemView.topAnchor.constraint(equalTo: contentView.topAnchor), // 將 subscribeSecItemView 的 topAnchor 設置為 homeTopItemView 的 bottomAnchor
                 subscribeSecItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 subscribeSecItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 subscribeSecItemView.heightAnchor.constraint(equalToConstant: 90), // 根據需要設置高度
@@ -179,9 +260,9 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             
             setupVideoFrameViewsLayout()
             
-//            // 設定 scrollView 的 contentSize
-//            let contentHeight = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + videoFrameView2TotalHeight
-//            scrollView.contentSize = CGSize(width: view.bounds.width, height: contentHeight)
+            // 設定 scrollView 的 contentSize
+            let contentHeight = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + videoFrameView2TotalHeight
+            scrollView.contentSize = CGSize(width: view.bounds.width, height: contentHeight)
         }
     
     private func setupVideoFrameViewsLayout() {

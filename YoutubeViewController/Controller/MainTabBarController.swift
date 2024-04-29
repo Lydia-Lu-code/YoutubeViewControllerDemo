@@ -13,29 +13,38 @@ class MainTabBarController: UITabBarController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         setupViewControllers()
-
     }
-    
+
 
     private func setupViewControllers() {
+        // HomeVC
         let homeVC = HomeVC()
+        let homeNav = UINavigationController(rootViewController: homeVC)
+        homeNav.tabBarItem = UITabBarItem(title: "Home", image: nil, tag: 0)
+        
+        // ShortsVC
         let shortsVC = ShortsTableViewController()
-        let subscribeVC = SubscribeVC()
-        let yourContentVC = YourContentVC()
+        let shortsNav = UINavigationController(rootViewController: shortsVC)
+        shortsNav.tabBarItem = UITabBarItem(title: "Shorts", image: nil, tag: 1)
+        
+        // AddVC
         let addVC = AddVC()
+        let addNav = UINavigationController(rootViewController: addVC)
+        addNav.tabBarItem = UITabBarItem(title: "Add", image: nil, tag: 2)
         
-        homeVC.tabBarItem = UITabBarItem(title: "首頁", image: UIImage(named: "home_icon"), tag: 0)
-        shortsVC.tabBarItem = UITabBarItem(title: "Shorts", image: UIImage(named: "shorts_icon"), tag: 1)
-        addVC.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "plus.circle.fill"), tag: 2)
-        subscribeVC.tabBarItem = UITabBarItem(title: "訂閱內容", image: UIImage(named: "subscribe_icon"), tag: 3)
-        yourContentVC.tabBarItem = UITabBarItem(title: "你的內容", image: UIImage(named: "your_content_icon"), tag: 4)
+        // SubscribeVC
+        let subscribeVC = SubscribeVC()
+        let subscribeNav = UINavigationController(rootViewController: subscribeVC)
+        subscribeNav.tabBarItem = UITabBarItem(title: "Subscribe", image: nil, tag: 3)
+        
+        // ContentVC
+        let contentTableViewController = ContentTableViewController()
+        let contentNav = UINavigationController(rootViewController: contentTableViewController)
+        contentNav.tabBarItem = UITabBarItem(title: "Content", image: nil, tag: 4)
+        
+        // 设置标签栏控制器的所有子视图控制器
+        self.viewControllers = [homeNav, shortsNav, addNav, subscribeNav, contentNav]
 
-        
-        viewControllers = [homeVC, shortsVC, addVC, subscribeVC, yourContentVC]
     }
-    
-
 }

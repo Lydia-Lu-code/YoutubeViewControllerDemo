@@ -37,7 +37,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
             return collectionView
         }()
     
-    
     // 添加 imageview
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -49,7 +48,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     }()
     
     
-    let homeTopItemView = HomeTopItemView()
+//    let homeTopItemView = HomeTopItemView()
     let videoFrameView = VideoFrameView()
     let shortsFrameCollectionView = ShortsFrameCollectionView()
     var videoFrameViews = [VideoFrameView]()
@@ -68,9 +67,104 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
         collectionView.dataSource = self
         
         
+        // 固定寬度，避免切換模式時位移
+        let fixedWidth = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedWidth.width = 14 // 調整寬度，以適應您的設計
+        
+        let btn1 = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(topButtonTapped))
+        let btn2 = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(topButtonTapped))
+        let btn3 = UIBarButtonItem(image: UIImage(systemName: "display.2"), style: .plain, target: self, action: #selector(topButtonTapped))
+
+        
+        // 将按钮添加到导航栏上
+        self.navigationItem.setRightBarButtonItems([btn1, btn2, btn3], animated: true)
+
+
+}
+
+    @objc func topButtonTapped(_ sender: UIBarButtonItem) {
+        switch sender {
+        case navigationItem.rightBarButtonItems?[2]: // buttonLeft
+            print("Home Left button tapped")
+            presentAlertController(title: "﻿選取裝置", message: nil)
+        case navigationItem.rightBarButtonItems?[1]: // buttonMid
+            print("Home Middle button tapped")
+            navigateToNotificationLogViewController()
+        case navigationItem.rightBarButtonItems?[0]: // buttonRight
+            print("Home Right button tapped")
+            presentSearchViewController()
+        default:
+            break
+        }
     }
     
+    func presentSearchViewController() {
+        // 在這裡實現您的 presentSearchViewController 方法
+        // 例如，可以是簡單的彈出搜索視圖控制器的代碼
+        let searchVC = SearchVC() // 假設 SearchViewController 是您的搜索視圖控制器類
+        self.present(searchVC, animated: true, completion: nil)
+    }
+    
+    private func presentAlertController(title: String, message: String?) {
+        guard let viewController = findViewController() else {
+            print("無法找到視圖控制器")
+            return
+        }
 
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+
+        // 設置標題文字左對齊
+        let titleParagraphStyle = NSMutableParagraphStyle()
+        titleParagraphStyle.alignment = NSTextAlignment.left
+        let titleAttributedString = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.paragraphStyle: titleParagraphStyle])
+        alertController.setValue(titleAttributedString, forKey: "attributedTitle")
+
+        alertController.addAction(UIAlertAction(title: "透過電視代碼連結", style: .default, handler: { (_) in
+            // buttonLeft 的處理代碼
+        }))
+
+        alertController.addAction(UIAlertAction(title: "了解詳情", style: .default, handler: { (_) in
+            // buttonMid 的處理代碼
+        }))
+
+        // 設置選項文字靠左對齊
+        for action in alertController.actions {
+            action.setValue(NSTextAlignment.left.rawValue, forKey: "titleTextAlignment")
+        }
+
+        viewController.present(alertController, animated: true, completion: nil)
+    }
+
+    private func navigateToNotificationLogViewController() {
+        guard let viewController = findViewController() else {
+            print("無法找到視圖控制器")
+            return
+        }
+        
+        let notificationLogVC = NotificationLogVC()
+        notificationLogVC.title = "通知"
+        viewController.navigationController?.pushViewController(notificationLogVC, animated: true)
+    }
+
+    private func findViewController() -> UIViewController? {
+        if let viewController = self.next as? UIViewController {
+            return viewController
+        } else {
+            var nextResponder = self.next
+            while let responder = nextResponder {
+                if let viewController = responder as? UIViewController {
+                    return viewController
+                }
+                nextResponder = responder.next
+            }
+        }
+        return nil
+    }
+    
+    
+
+
+    
 
     @objc func didTapMenuButton() {
         delegate?.didTapMenuButton()
@@ -80,7 +174,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(homeTopItemView)
+//        contentView.addSubview(homeTopItemView)
         contentView.addSubview(collectionView)
         contentView.addSubview(videoFrameView)
         contentView.addSubview(imageView)
@@ -93,7 +187,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     private func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        homeTopItemView.translatesAutoresizingMaskIntoConstraints = false
+//        homeTopItemView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         videoFrameView.translatesAutoresizingMaskIntoConstraints = false
         shortsFrameCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -120,12 +214,13 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
             contentView.bottomAnchor.constraint(equalTo: shortsFrameCollectionView.bottomAnchor), // 更新這裡
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-            homeTopItemView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            homeTopItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            homeTopItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            homeTopItemView.heightAnchor.constraint(equalToConstant: 60),
+//            homeTopItemView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            homeTopItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            homeTopItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            homeTopItemView.heightAnchor.constraint(equalToConstant: 60),
 
-            collectionView.topAnchor.constraint(equalTo: homeTopItemView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            collectionView.topAnchor.constraint(equalTo: homeTopItemView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 60),

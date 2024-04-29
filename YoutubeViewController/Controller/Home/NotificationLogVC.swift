@@ -128,21 +128,6 @@ class NotificationLogVC: UIViewController {
             view.backgroundColor = .white
         }
     }
-//    // 在 NotificationLogVC 類中添加以下方法
-//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//        super.traitCollectionDidChange(previousTraitCollection)
-//        
-//        // 檢查當前的外觀模式
-//        let isDarkMode = traitCollection.userInterfaceStyle == .dark
-//        
-//        // 設置標題文字顏色為淺色模式下為黑色，深色模式下為白色
-//        let titleColor: UIColor = isDarkMode ? .white : .black
-//        let titleAttributes: [NSAttributedString.Key: Any] = [
-//            .foregroundColor: titleColor,
-//            .font: UIFont.systemFont(ofSize: 20, weight: .bold) // 設置標題的字體
-//        ]
-//        navigationController?.navigationBar.titleTextAttributes = titleAttributes
-//    }
 
     
     // MARK: - UICollectionViewDataSource
