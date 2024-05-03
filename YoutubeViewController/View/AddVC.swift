@@ -6,7 +6,8 @@ class AddVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("AddVC viewDidLoad 被呼叫了")
-//        
+        view.backgroundColor = .systemBackground
+//
 //        // 配置ADD鍵的外觀
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.circle.fill"), style: .plain, target: self, action: #selector(addButtonTapped))
 //    }

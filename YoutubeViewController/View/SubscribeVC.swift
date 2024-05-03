@@ -68,6 +68,8 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
         override func viewDidLoad() {
             super.viewDidLoad()
             
+            view.backgroundColor = .systemBackground
+            
             scrollView.isScrollEnabled = true
             setupViews()
             setLayout()
@@ -107,10 +109,14 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
         }
         
         func presentSearchViewController() {
-            // 在這裡實現您的 presentSearchViewController 方法
-            // 例如，可以是簡單的彈出搜索視圖控制器的代碼
+            guard let viewController = findViewController() else {
+                print("無法找到視圖控制器")
+                return
+            }
+            
             let searchVC = SearchVC() // 假設 SearchViewController 是您的搜索視圖控制器類
-            self.present(searchVC, animated: true, completion: nil)
+            searchVC.title = navigationItem.searchController?.searchBar.text ?? "" // 使用搜索框的文本作为标题
+            viewController.navigationController?.pushViewController(searchVC, animated: true)
         }
         
         private func presentAlertController(title: String, message: String?) {

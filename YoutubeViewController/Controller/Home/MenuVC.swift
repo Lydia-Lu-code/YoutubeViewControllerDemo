@@ -56,6 +56,12 @@ class MenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let width = screenWidth * 0.75
+        view.frame = CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height)
+
+        
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -75,6 +81,14 @@ class MenuVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // 添加點擊手勢辨識器
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
+        
+        // 添加返回键
+        let backButton = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc private func backButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
     
     // 手勢辨識器的動作處理方法

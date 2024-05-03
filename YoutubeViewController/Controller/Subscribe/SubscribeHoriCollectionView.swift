@@ -14,27 +14,6 @@ class SubscribeHoriCollectionView: UICollectionView, UICollectionViewDelegate, U
         
         let button = UIButton()
         
-//        // 新增右上角的 UIImageView
-//        let imageView: UIImageView = {
-//            let imageView = UIImageView()
-//            imageView.backgroundColor = .white
-//            imageView.image = UIImage(named: "your_image_name") // 設置圖片
-//            imageView.contentMode = .scaleAspectFit
-//            imageView.translatesAutoresizingMaskIntoConstraints = false
-//            return imageView
-//        }()
-//        
-//        // 新增兩行文字的 UILabel
-//        let titleLabel: UILabel = {
-//            let label = UILabel()
-//            label.textColor = .black
-//            label.text = "Video 4 contentVideo 4 contentVideo 4 content"
-//            label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-//            label.numberOfLines = 2
-//            label.translatesAutoresizingMaskIntoConstraints = false
-//            return label
-//        }()
-        
         init(frame: CGRect) {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal // 設定水平滾動
@@ -58,15 +37,8 @@ class SubscribeHoriCollectionView: UICollectionView, UICollectionViewDelegate, U
         private func setupUI() {
             // 按鈕設定
             button.setTitleColor(.black, for: .normal)
-    //        button.backgroundColor = .yellow
             button.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(button) // 替換 contentView 為 self
-            
-            // 添加 imageView
-//            self.addSubview(imageView) // 替換 contentView 為 self
-            
-            // 添加 titleLabel
-//            self.addSubview(titleLabel) // 替換 contentView 為 self
             
             // 布局
             NSLayoutConstraint.activate([
@@ -76,16 +48,6 @@ class SubscribeHoriCollectionView: UICollectionView, UICollectionViewDelegate, U
                 button.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 button.bottomAnchor.constraint(equalTo: self.bottomAnchor),
                 
-//                // imageView 右上角约束
-//                imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-//                imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
-//                imageView.widthAnchor.constraint(equalToConstant: 15),
-//                imageView.heightAnchor.constraint(equalToConstant: 15),
-//                
-//                // titleLabel 约束
-//                titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-//                titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
-//                titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5)
             ])
         }
         

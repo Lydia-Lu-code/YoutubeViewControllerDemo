@@ -20,11 +20,18 @@ class ContentTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .systemBackground
+        
         setTopBarButton()
 
         tableView.register(ContentTableViewCell.self, forCellReuseIdentifier: "ContentTableViewCell")
         // 设置 contentInset
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
+        tableView.estimatedSectionHeaderHeight = 0
+        tableView.sectionHeaderTopPadding = 0
+
 }
 
     
@@ -33,25 +40,58 @@ class ContentTableViewController: UITableViewController {
     
     func setTopBarButton(){
  
+//        let width: CGFloat = 5.0
+        
         let btn1 = UIBarButtonItem(image: UIImage(systemName: "display.2"), style: .plain, target: self, action: #selector(topButtonTapped))
+//        btn1.width = width
+        
         let btn2 = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: #selector(topButtonTapped))
+//        btn2.width = width
+        
         let btn3 = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(topButtonTapped))
+//        btn3.width = width
+        
 //        let btn4 = UIBarButtonItem(image: UIImage(named: "image2"), style: .plain, target: self, action: #selector(topButtonTapped))
         
-        let btn4 = UIBarButtonItem(image: UIImage(named: "image2")?.withRenderingMode(.alwaysOriginal).withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(topButtonTapped))
-        btn4.image?.withRenderingMode(.alwaysTemplate)
-        btn4.image?.withRenderingMode(.alwaysOriginal)
-        btn4.image?.withRenderingMode(.automatic)
-        // 访问按钮的customView
+        // 调整图像大小
+        let image = UIImage(named: "image3")?.withRenderingMode(.alwaysOriginal)
+        let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 55, height: 30)) // 调整图像大小为 20x20
+        
+        let btn4 = UIBarButtonItem(image: resizedImage, style: .plain, target: self, action: #selector(topButtonTapped))
+//        btn4.width = width
+        
+        // 设置圆角
         if let buttonView = btn4.customView {
-            // 设置圆角
-            buttonView.layer.cornerRadius = 5
-            buttonView.layer.masksToBounds = true // 必须将masksToBounds属性设置为true，以确保圆角生效
+            buttonView.layer.cornerRadius = 10
+            buttonView.layer.masksToBounds = true
         }
         
         
         // 将按钮添加到导航栏上
         self.navigationItem.setRightBarButtonItems([btn4, btn3, btn2, btn1], animated: true)
+    }
+    
+    func resizeImage(image: UIImage?, targetSize: CGSize) -> UIImage? {
+        guard let image = image else { return nil }
+        
+        let size = image.size
+        let widthRatio = targetSize.width / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        let newSize: CGSize
+        if widthRatio > heightRatio {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        let rect = CGRect(origin: .zero, size: newSize)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 
     @objc func topButtonTapped(_ sender: UIBarButtonItem) {
@@ -74,10 +114,14 @@ class ContentTableViewController: UITableViewController {
     }
     
     func presentSearchViewController() {
-        // 在這裡實現您的 presentSearchViewController 方法
-        // 例如，可以是簡單的彈出搜索視圖控制器的代碼
+        guard let viewController = findViewController() else {
+            print("無法找到視圖控制器")
+            return
+        }
+        
         let searchVC = SearchVC() // 假設 SearchViewController 是您的搜索視圖控制器類
-        self.present(searchVC, animated: true, completion: nil)
+        searchVC.title = navigationItem.searchController?.searchBar.text ?? "" // 使用搜索框的文本作为标题
+        viewController.navigationController?.pushViewController(searchVC, animated: true)
     }
     
     private func presentAlertController(title: String, message: String?) {

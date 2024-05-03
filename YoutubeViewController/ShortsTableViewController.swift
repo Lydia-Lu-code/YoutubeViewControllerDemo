@@ -14,6 +14,8 @@ class ShortsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = .systemBackground
+        
         tableView.register(ShortsTableViewCell.self, forCellReuseIdentifier: "ShortsTableViewCell")
 
         

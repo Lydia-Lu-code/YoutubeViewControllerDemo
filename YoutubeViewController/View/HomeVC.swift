@@ -7,7 +7,7 @@ protocol HomeVCDelegate: AnyObject {
     func didTapNotificationLog﻿ButtonMid()
 }
 
-class HomeVC: UIViewController,ButtonCollectionCellDelegate {
+class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTransitioningDelegate {
 
     weak var delegate: HomeVCDelegate?
     
@@ -30,7 +30,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
             layout.scrollDirection = .horizontal
             layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//            collectionView.backgroundColor = .clear
             collectionView.showsHorizontalScrollIndicator = false
 
             collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "ButtonCell")
@@ -48,16 +47,21 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     }()
     
     
-//    let homeTopItemView = HomeTopItemView()
     let videoFrameView = VideoFrameView()
     let shortsFrameCollectionView = ShortsFrameCollectionView()
     var videoFrameViews = [VideoFrameView]()
     var menuViewController: MenuVC?
     var notificationLogViewController = NotificationLogVC()
-    let videoFrameView2 = VideoFrameView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let width = screenWidth * 0.75
+        view.frame = CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height)
+
+        
+        view.backgroundColor = .systemBackground
         
         scrollView.isScrollEnabled = true
         setupViews()
@@ -99,10 +103,14 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     }
     
     func presentSearchViewController() {
-        // 在這裡實現您的 presentSearchViewController 方法
-        // 例如，可以是簡單的彈出搜索視圖控制器的代碼
+        guard let viewController = findViewController() else {
+            print("無法找到視圖控制器")
+            return
+        }
+        
         let searchVC = SearchVC() // 假設 SearchViewController 是您的搜索視圖控制器類
-        self.present(searchVC, animated: true, completion: nil)
+        searchVC.title = navigationItem.searchController?.searchBar.text ?? "" // 使用搜索框的文本作为标题
+        viewController.navigationController?.pushViewController(searchVC, animated: true)
     }
     
     private func presentAlertController(title: String, message: String?) {
@@ -174,7 +182,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
-//        contentView.addSubview(homeTopItemView)
         contentView.addSubview(collectionView)
         contentView.addSubview(videoFrameView)
         contentView.addSubview(imageView)
@@ -187,7 +194,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
     private func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-//        homeTopItemView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         videoFrameView.translatesAutoresizingMaskIntoConstraints = false
         shortsFrameCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -214,13 +220,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate {
             contentView.bottomAnchor.constraint(equalTo: shortsFrameCollectionView.bottomAnchor), // 更新這裡
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-//            homeTopItemView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            homeTopItemView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            homeTopItemView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            homeTopItemView.heightAnchor.constraint(equalToConstant: 60),
-
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            collectionView.topAnchor.constraint(equalTo: homeTopItemView.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 60),
@@ -304,12 +304,23 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
         
         if title == "﻿ 📍﻿ " {
             let menuVC = MenuVC()
-            self.navigationController?.pushViewController(menuVC, animated: true)
+//            self.navigationController?.pushViewController(menuVC, animated: true)
+            // 设置自定义过渡动画代理
+            menuVC.transitioningDelegate = self
+            menuVC.modalPresentationStyle = .custom
+            self.present(menuVC, animated: true, completion: nil)
         } else {
             print("其他按鈕被點擊：\(title)")
         }
     }
 
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return SlideInTransition()
+    }
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

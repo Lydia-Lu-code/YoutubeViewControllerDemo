@@ -33,6 +33,7 @@
 		00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */; };
 		00C3814B2BDBA9E6009A47AF /* ContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3814A2BDBA9E6009A47AF /* ContentHeaderView.swift */; };
 		00C3814D2BDBB218009A47AF /* ContentTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3814C2BDBB218009A47AF /* ContentTopView.swift */; };
+		00C381AF2BDFE721009A47AF /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C381AE2BDFE721009A47AF /* SlideInTransition.swift */; };
 		00E63AA62BCCDA4C0019CB6D /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AA52BCCDA4C0019CB6D /* MenuVC.swift */; };
 		00E63AA82BCCDAD00019CB6D /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AA72BCCDAD00019CB6D /* ContainerVC.swift */; };
 		00E63AB02BD015840019CB6D /* NotificationLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */; };
@@ -68,6 +69,7 @@
 		00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		00C3814A2BDBA9E6009A47AF /* ContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHeaderView.swift; sourceTree = "<group>"; };
 		00C3814C2BDBB218009A47AF /* ContentTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTopView.swift; sourceTree = "<group>"; };
+		00C381AE2BDFE721009A47AF /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
 		00E63AA52BCCDA4C0019CB6D /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		00E63AA72BCCDAD00019CB6D /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationLogVC.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				008551DE2BC0198100DA3913 /* AddVC.swift */,
 				00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */,
 				007BB5352BB93A0000431084 /* HomeVC.swift */,
+				00C381AE2BDFE721009A47AF /* SlideInTransition.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				0063E4D12BBEA5FD0086C0BA /* ShortsTableViewCell.swift in Sources */,
 				00C3813D2BD948AC009A47AF /* SubscribeHoriCollectionView.swift in Sources */,
 				0063E4D32BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift in Sources */,
+				00C381AF2BDFE721009A47AF /* SlideInTransition.swift in Sources */,
 				00C3814D2BDBB218009A47AF /* ContentTopView.swift in Sources */,
 				00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */,
 			);

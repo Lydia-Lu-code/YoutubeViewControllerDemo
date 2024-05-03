@@ -60,7 +60,7 @@ class SubscribeSecItemView: UIView {
     let rightButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .black
+        button.backgroundColor = .systemBackground
         button.setTitle("全部", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         return button
