@@ -1,4 +1,3 @@
-//
 //  SlideInTransition.swift
 //  YoutubeViewController
 //
@@ -8,6 +7,7 @@
 import UIKit
 
 class SlideInTransition: NSObject, UIViewControllerAnimatedTransitioning {
+
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3 // 过渡动画持续时间

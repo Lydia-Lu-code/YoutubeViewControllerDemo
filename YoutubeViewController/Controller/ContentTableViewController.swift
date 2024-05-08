@@ -226,7 +226,7 @@ class ContentTableViewController: UITableViewController {
             return headerView
         } else {
             let headerView = ContentHeaderView()
-            
+            headerView.delegate = self
             // 可以根據需要設置按鈕的標題、樣式等屬性
             headerView.leftButton.setTitle("Left Button", for: .normal)
             headerView.rightButton.setTitle("Right Button", for: .normal)
@@ -252,5 +252,14 @@ class ContentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 180
     }
+    
+}
+
+
+extension ContentTableViewController:ContentHeaderViewDelegate {
+    func doSegueAction() {
+        print("成功")
+    }
+    
     
 }

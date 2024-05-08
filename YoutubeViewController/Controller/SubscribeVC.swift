@@ -294,7 +294,6 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
     
     }
 
-
 extension SubscribeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return buttonTitles.count // 返回 CollectionView 中的按钮数量
@@ -306,14 +305,15 @@ extension SubscribeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICo
             cell.button.setTitle(title, for: .normal)
             
             // 设置按钮的样式
-            cell.button.backgroundColor = UIColor.gray // 默认灰色背景
+            cell.button.backgroundColor = UIColor.darkGray
+            
             cell.button.setTitleColor(UIColor.white, for: .normal) // 默认白色文字
             cell.button.titleLabel?.font = UIFont.systemFont(ofSize: 14) // 按钮字体大小
             
             if indexPath.item == buttonTitles.count - 1 {
                 // 如果是最后一个按钮，则设置特殊样式
-                cell.button.backgroundColor = UIColor.clear // 透明背景
-                cell.button.setTitleColor(UIColor.blue, for: .normal) // 蓝色文字
+                cell.button.backgroundColor = UIColor.clear
+                cell.button.setTitleColor(UIColor.systemBlue, for: .normal) // 蓝色文字
                 cell.button.titleLabel?.font = UIFont.systemFont(ofSize: 13) // 缩小字体大小
             }
             

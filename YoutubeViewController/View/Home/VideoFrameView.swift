@@ -38,6 +38,7 @@ class VideoFrameView: UIView {
         lbl.translatesAutoresizingMaskIntoConstraints  = false
 //        lbl.backgroundColor = .orange
         lbl.text = "Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ Title﻿ " // 這裡設定了一個範例文字
+        lbl.font = UIFont.systemFont(ofSize: 14)
         lbl.numberOfLines = 2 // 兩行文字
         return lbl
     }()
@@ -45,8 +46,9 @@ class VideoFrameView: UIView {
     let labelMidOther : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints  = false
-//        lbl.backgroundColor = .blue
+        lbl.font = UIFont.systemFont(ofSize: 10)
         lbl.text = "Other" // 這裡設定了一個範例文字
+        lbl.numberOfLines = 2 // 兩行文字
         return lbl
     }()
     

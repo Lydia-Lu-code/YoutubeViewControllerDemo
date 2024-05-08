@@ -11,7 +11,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
 
     weak var delegate: HomeVCDelegate?
     
-    let buttonTitles = ["﻿ 📍﻿ ", "﻿全部", "﻿音樂", "﻿遊戲", "﻿合輯", "﻿直播中", "﻿動畫", "﻿寵物", "﻿最新上傳", "讓你耳目一新的影片", "﻿提供意見"]
+    let buttonTitles = ["﻿📍﻿", "﻿全部", "﻿音樂", "﻿遊戲", "﻿合輯", "﻿直播中", "﻿動畫", "﻿寵物", "﻿最新上傳", "讓你耳目一新的影片", "﻿提供意見"]
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -35,16 +35,46 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
             collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "ButtonCell")
             return collectionView
         }()
-    
-    // 添加 imageview
-    lazy var imageView: UIImageView = {
+
+
+    // 定義一個 UILabel 用於顯示播放器符號
+    lazy var playerSymbolImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = UIColor.red // 將背景色設定為紅色
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "play.circle")
+        imageView.tintColor = UIColor.systemBlue
+        imageView.widthAnchor.constraint(equalToConstant: 35).isActive = true // 設置寬度為 50
+        imageView.heightAnchor.constraint(equalToConstant: 35).isActive = true // 設置高度為 50
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
         return imageView
     }()
+
+    // 定義一個 UILabel 用於顯示 "Shorts" 文字
+    lazy var shortsLbl: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Shorts"
+        label.textAlignment = .left
+        label.font = UIFont.boldSystemFont(ofSize: 18) // 設置粗體 18PT
+        label.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
+        return label
+    }()
+
+
+    // 定義一個 StackView 用於將播放器符號和 "Shorts" 文字放在一起
+    lazy var shortsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8 // 設置元件間距
+        stackView.distribution = .fill // 將分佈設置為填充
+        stackView.alignment = .center // 將對齊方式設置為居中對齊
+        stackView.addArrangedSubview(playerSymbolImageView)
+        stackView.addArrangedSubview(shortsLbl)
+        return stackView
+    }()
+
     
     
     let videoFrameView = VideoFrameView()
@@ -52,6 +82,13 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
     var videoFrameViews = [VideoFrameView]()
     var menuViewController: MenuVC?
     var notificationLogViewController = NotificationLogVC()
+    
+    
+    var snippetChannelId: String = ""
+    var viewCount: String = ""
+    var calculateDaysSinceUpload: String = ""
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,9 +120,8 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         // 将按钮添加到导航栏上
         self.navigationItem.setRightBarButtonItems([btn1, btn2, btn3], animated: true)
 
-
+        fetchYouTubeData()
 }
-
     @objc func topButtonTapped(_ sender: UIBarButtonItem) {
         switch sender {
         case navigationItem.rightBarButtonItems?[2]: // buttonLeft
@@ -101,7 +137,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
             break
         }
     }
-    
     func presentSearchViewController() {
         guard let viewController = findViewController() else {
             print("無法找到視圖控制器")
@@ -112,7 +147,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         searchVC.title = navigationItem.searchController?.searchBar.text ?? "" // 使用搜索框的文本作为标题
         viewController.navigationController?.pushViewController(searchVC, animated: true)
     }
-    
     private func presentAlertController(title: String, message: String?) {
         guard let viewController = findViewController() else {
             print("無法找到視圖控制器")
@@ -142,7 +176,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
 
         viewController.present(alertController, animated: true, completion: nil)
     }
-
     private func navigateToNotificationLogViewController() {
         guard let viewController = findViewController() else {
             print("無法找到視圖控制器")
@@ -153,7 +186,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         notificationLogVC.title = "通知"
         viewController.navigationController?.pushViewController(notificationLogVC, animated: true)
     }
-
     private func findViewController() -> UIViewController? {
         if let viewController = self.next as? UIViewController {
             return viewController
@@ -168,29 +200,19 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         }
         return nil
     }
-    
-    
-
-
-    
-
     @objc func didTapMenuButton() {
         delegate?.didTapMenuButton()
         delegate?.didTapNotificationLog﻿ButtonMid()
     }
-
     private func setupViews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(collectionView)
         contentView.addSubview(videoFrameView)
-        contentView.addSubview(imageView)
+        contentView.addSubview(shortsStackView)
         contentView.addSubview(shortsFrameCollectionView)
         collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
     }
-
-
-    
     private func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -231,12 +253,12 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
             videoFrameView.heightAnchor.constraint(equalToConstant: 280),
 
             // imageView 布局
-            imageView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 70), // 設定高度為 160
+            shortsStackView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
+            shortsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            shortsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            shortsStackView.heightAnchor.constraint(equalToConstant: 70), // 設定高度為 160
 
-            shortsFrameCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            shortsFrameCollectionView.topAnchor.constraint(equalTo: shortsStackView.bottomAnchor),
             shortsFrameCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             shortsFrameCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             shortsFrameCollectionView.heightAnchor.constraint(equalToConstant: 600),
@@ -248,7 +270,6 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         let contentHeight = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + videoFrameView2TotalHeight
         scrollView.contentSize = CGSize(width: view.bounds.width, height: contentHeight)
     }
-    
     private func setupVideoFrameViewsLayout() {
         var previousVideoFrameView: UIView = shortsFrameCollectionView
 
@@ -282,7 +303,7 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
         cell.button.setTitle(title, for: .normal)
         
         // 设置按钮的样式
-        cell.button.backgroundColor = UIColor.gray // 默认灰色背景
+        cell.button.backgroundColor = UIColor.darkGray // 默认灰色背景
         cell.button.setTitleColor(UIColor.white, for: .normal) // 默认白色文字
         cell.button.titleLabel?.font = UIFont.systemFont(ofSize: 14) // 按钮字体大小
         
@@ -302,9 +323,8 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
     @objc private func buttonTapped(_ sender: UIButton) {
         guard let title = sender.titleLabel?.text else { return }
         
-        if title == "﻿ 📍﻿ " {
+        if title == "﻿📍﻿" {
             let menuVC = MenuVC()
-//            self.navigationController?.pushViewController(menuVC, animated: true)
             // 设置自定义过渡动画代理
             menuVC.transitioningDelegate = self
             menuVC.modalPresentationStyle = .custom
@@ -313,6 +333,8 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
             print("其他按鈕被點擊：\(title)")
         }
     }
+    
+    
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return SlideInTransition()
@@ -337,8 +359,178 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
     }
 }
 
+struct ResponseType: Codable {
+    // 定義你需要的屬性，以匹配 YouTube API 的回應格式
+}
+
+extension HomeVC {
+    
+    func calculateTimeSinceUpload(from publishTime: String) -> String {
+        // 將 publishTime 轉換為日期對象
+        let dateFormatter = ISO8601DateFormatter()
+        if let publishDate = dateFormatter.date(from: publishTime) {
+            // 計算距今的時間間隔
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day, .hour], from: publishDate, to: Date())
+            
+            // 判斷距離上傳的時間，決定顯示的格式
+            if let years = components.year, years > 0 {
+                return "\(years)年前"
+            } else if let months = components.month, months > 0 {
+                return "\(months)個月前"
+            } else if let days = components.day, days > 0 {
+                return "\(days)天前"
+            } else if let hours = components.hour, hours > 0 {
+                return "\(hours)個小時前"
+            } else {
+                return "剛剛"
+            }
+        }
+        return ""
+    }
+ 
+    
+//    func loadDataVideoFrameView(withTitle title: String, daysSinceUpload: String) {
+//        // 將資料設置到 labelMidTitle 中
+//        videoFrameView.labelMidTitle.text = title
+//        videoFrameView.labelMidOther.text = "\(snippetChannelId)．觀看次數： \(viewCount)次．\(daysSinceUpload)"
+//    }
+
+//    func loadDataVideoFrameView(withTitle title: String, viewCount: String, daysSinceUpload: String) {
+//        // 將資料設置到 labelMidTitle 中
+//        videoFrameView.videoView
+//        videoFrameView.imageView = 
+//        videoFrameView.labelMidTitle.text = title
+//        videoFrameView.labelMidOther.text = "\(snippetChannelId)．觀看次數： \(viewCount)次．\(daysSinceUpload)"
+//    }
+
+    func loadDataVideoFrameView(withTitle title: String, thumbnailURL: String, accountImageURL: String, viewCount: String, daysSinceUpload: String) {
+        // 將資料設置到 labelMidTitle 中
+        videoFrameView.labelMidTitle.text = title
+        
+        // 設置影片縮圖
+        if let thumbnailURL = URL(string: thumbnailURL) {
+            URLSession.shared.dataTask(with: thumbnailURL) { data, _, error in
+                if let error = error {
+                    print("Error fetching thumbnail image: \(error)")
+                    return
+                }
+                guard let data = data, let image = UIImage(data: data) else {
+                    print("Failed to extract image from data.")
+                    return
+                }
+                DispatchQueue.main.async {
+                    // 設置影片縮圖
+                    self.videoFrameView.videoView.backgroundColor = UIColor(patternImage: image)
+                }
+            }.resume()
+        } else {
+            print("Invalid thumbnail URL.")
+        }
+        
+        // 設置帳號圖片
+        if let accountImageURL = URL(string: accountImageURL) {
+            URLSession.shared.dataTask(with: accountImageURL) { data, _, error in
+                if let error = error {
+                    print("Error fetching account image: \(error)")
+                    return
+                }
+                guard let data = data, let image = UIImage(data: data) else {
+                    print("Failed to extract image from data.")
+                    return
+                }
+                DispatchQueue.main.async {
+                    // 設置帳號圖片
+                    self.videoFrameView.imageView.image = image
+                }
+            }.resume()
+        } else {
+            print("Invalid account image URL.")
+        }
+        
+        // 設置觀看次數和上傳天數
+        videoFrameView.labelMidOther.text = "\(snippetChannelId)．觀看次數： \(viewCount)次．\(daysSinceUpload)"
+    }
+
+    
+    func fetchYouTubeData() {
+
+        let apiKey = "AIzaSyC1LUGmn3kwNecr13UCLwOQEDhn7h6r5Co"
+        
+        let topUrlString = "https://www.googleapis.com/youtube/v3/videos?key=\(apiKey)&chart=mostPopular&maxResults=5&regionCode=TW&part=snippet,contentDetails,statistics"
+        
 
 
+        guard let url = URL(string: topUrlString) else {
+            print("無效的 URL")
+            return
+        }
+
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("錯誤: \(error.localizedDescription)")
+                return
+            }
+
+            guard let data = data else {
+                print("未收到數據")
+                return
+            }
+        
+            
+            let dateFormatter = ISO8601DateFormatter()
+                dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+            
+            do {
+                // 解析返回的 JSON 数据
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(Welcome.self, from: data)
+
+                if !result.items.isEmpty {
+                    let firstVideo = result.items[0]
+                    let videoTitle = firstVideo.snippet.title
+                    let videoChannelTitle = firstVideo.snippet.channelTitle
+                    let videoDescription = firstVideo.snippet.description
+                    let videoPublishTime = firstVideo.snippet.publishedAt
+                    let viewCount = firstVideo.statistics.viewCount
+                    let thumbnailURL = firstVideo.snippet.thumbnails.medium.url // 假設有一個 medium 縮略圖
+                    let accountImageURL = firstVideo.snippet.thumbnails.thumbnailsDefault.url // 假設有一個 default 帳戶圖片
+                    print("viewCount == \(viewCount)")
+                    
+                    // 將獲取的數據存儲到對應的變量中
+                    self.snippetChannelId = videoChannelTitle
+
+
+                    // 調用 calculateTimeSinceUpload 方法，獲取“幾天前”字符串
+                    let daysSinceUpload = self.calculateTimeSinceUpload(from: videoPublishTime)
+
+                    // 將標題傳遞給方法，更新 UI
+                    DispatchQueue.main.async {
+                        self.loadDataVideoFrameView(withTitle: videoTitle, thumbnailURL: thumbnailURL, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload)
+                        
+                        
+//                        self.loadDataVideoFrameView(withTitle: videoTitle, viewCount: viewCount, daysSinceUpload: daysSinceUpload)
+                    }
+                } else {
+                    print("No items found in the video information.")
+                }
+            } catch {
+                print("Error decoding JSON: \(error)")
+            }
+
+
+        }.resume()
+
+
+        
+
+    }
+
+}
+
+// touch Gesture 點旁邊
+// Animation 方向是 右到左
 
 
 

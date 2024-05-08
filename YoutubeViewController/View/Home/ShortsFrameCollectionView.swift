@@ -23,7 +23,7 @@ class ShortsFrameCollectionView: UICollectionView, UICollectionViewDelegate, UIC
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
-        imageView.image = UIImage(named: "your_image_name") // 設置圖片
+        imageView.image = UIImage(named: "image1") // 設置圖片
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -46,7 +46,7 @@ class ShortsFrameCollectionView: UICollectionView, UICollectionViewDelegate, UIC
         
         self.isScrollEnabled = false // 禁用自動滾動
         
-        self.backgroundColor = .darkGray
+//        self.backgroundColor = .darkGray
         self.delegate = self
         self.dataSource = self
         
