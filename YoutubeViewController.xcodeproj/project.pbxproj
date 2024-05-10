@@ -31,6 +31,7 @@
 		008551EC2BC13E1300DA3913 /* ShortsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551EB2BC13E1300DA3913 /* ShortsBtnView.swift */; };
 		008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551EE2BC15AB600DA3913 /* AddCollectionView.swift */; };
 		008551F22BC15C7D00DA3913 /* SubscribeSecItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */; };
+		00BE1C0D2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */; };
 		00C3813B2BD90E2D009A47AF /* ShortsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */; };
 		00C3813D2BD948AC009A47AF /* SubscribeHoriCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3813C2BD948AC009A47AF /* SubscribeHoriCollectionView.swift */; };
 		00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		008551EB2BC13E1300DA3913 /* ShortsBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsBtnView.swift; sourceTree = "<group>"; };
 		008551EE2BC15AB600DA3913 /* AddCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionView.swift; sourceTree = "<group>"; };
 		008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeSecItemView.swift; sourceTree = "<group>"; };
+		00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 		00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortsTableViewController.swift; path = ../ShortsTableViewController.swift; sourceTree = "<group>"; };
 		00C3813C2BD948AC009A47AF /* SubscribeHoriCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeHoriCollectionView.swift; sourceTree = "<group>"; };
 		00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,8 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				007BB5312BB93A0000431084 /* AppDelegate.swift */,
-				00254B442BEA5B52001B4041 /* VideoListResponse.swift */,
 				007BB5332BB93A0000431084 /* SceneDelegate.swift */,
+				00254B442BEA5B52001B4041 /* VideoListResponse.swift */,
 				007D0EEB2BE4E9160067804D /* YouTubeSearchResult.swift */,
 				007D0F2B2BE758D90067804D /* YoutubeVideoData.swift */,
 				008551E22BC0F53F00DA3913 /* View */,
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */,
+				00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */,
 				00219D6F2BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift */,
 				00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */,
 				00219D712BD62DF7007AC84F /* NotificationCustomView.swift */,
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00BE1C0D2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift in Sources */,
 				007BB54A2BBAA1F200431084 /* VideoFrameView.swift in Sources */,
 				007D0F2C2BE758DA0067804D /* YoutubeVideoData.swift in Sources */,
 				00219D762BD69AAE007AC84F /* NotificationTableViewCell.swift in Sources */,

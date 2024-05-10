@@ -9,6 +9,12 @@ class ButtonCollectionViewCell: UICollectionViewCell {
     // 父視圖控制器的委託
     weak var delegate: ButtonCollectionCellDelegate?
     
+    // 新增屬性來存儲按鈕的標題
+    var title: String? {
+        didSet {
+            button.setTitle(title, for: .normal)
+        }
+    }
     
     let button: UIButton = {
         let button = UIButton()
@@ -37,6 +43,10 @@ class ButtonCollectionViewCell: UICollectionViewCell {
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         
+        // 添加按鈕點擊事件
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+
+        
         // 添加按鈕約束
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -45,6 +55,11 @@ class ButtonCollectionViewCell: UICollectionViewCell {
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+    // 按鈕點擊事件
+    @objc private func buttonTapped() {
+        delegate?.didTapButton()
+    }
+
 }
 
 

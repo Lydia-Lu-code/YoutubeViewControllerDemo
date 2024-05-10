@@ -19,10 +19,12 @@ class VideoFrameView: UIView {
     
 
     
-    lazy var videoView : UIView = {
-        let vidView = UIView()
+    lazy var videoView : UIImageView = {
+        let vidView = UIImageView()
         vidView.translatesAutoresizingMaskIntoConstraints = false
         vidView.backgroundColor = .lightGray
+        vidView.contentMode = .scaleAspectFill // 將圖片的 contentMode 設置為 .scaleAspectFill，使圖片自動拉伸以填滿視圖
+        vidView.clipsToBounds = true // 剪切超出視圖範圍的部分
         return vidView
     }()
     
@@ -89,26 +91,28 @@ class VideoFrameView: UIView {
         buttonRight.layer.cornerRadius = 30 // 圓形的半徑為寬度的一半
         buttonRight.clipsToBounds = true // 剪切超出圓形範圍的部分
         
-        
+
         // 設置 videoView 的約束
         NSLayoutConstraint.activate([
             videoView.leadingAnchor.constraint(equalTo: self.leadingAnchor), // 與 VideoFrameView 的 leadingAnchor 對齊
             videoView.topAnchor.constraint(equalTo: self.topAnchor), // 與 VideoFrameView 的 topAnchor 對齊
-            videoView.heightAnchor.constraint(equalToConstant: 200), // imageView 的高度設置為 200
-            videoView.widthAnchor.constraint(equalTo: self.widthAnchor) // imageView 的寬度與 VideoFrameView 的寬度相等
+            videoView.widthAnchor.constraint(equalTo:videoView.heightAnchor, multiplier: 1280/720), // 寬度與高度比例為 1280:720
+            videoView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         
         // 設置 imageView 的約束
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor), // 與 VideoFrameView 的 leadingAnchor 對齊
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
+            imageView.topAnchor.constraint(equalTo: videoView.bottomAnchor, constant: 8), // imageView 的 topAnchor 設置為 videoView 的 bottomAnchor，間距為 8 個點
+
             imageView.heightAnchor.constraint(equalToConstant: 60), // imageView 的高度設置為 60
             imageView.widthAnchor.constraint(equalToConstant: 60) // imageView 的寬度設置為 60
         ])
         
         NSLayoutConstraint.activate([
             buttonRight.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            buttonRight.topAnchor.constraint(equalTo: self.topAnchor, constant: 200),
+            buttonRight.topAnchor.constraint(equalTo: videoView.bottomAnchor, constant: 8), // buttonRight 的 topAnchor 設置為 videoView 的 bottomAnchor，間距為 8 個點
+
             buttonRight.heightAnchor.constraint(equalToConstant: 60), // imageView 的高度設置為 60
             buttonRight.widthAnchor.constraint(equalToConstant: 60) // imageView 的寬度設置為 60
         ])
@@ -117,13 +121,13 @@ class VideoFrameView: UIView {
             // labelMidTitle 的约束
             labelMidTitle.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5), // labelMidTitle 左边与 imageView 右边相距 5 点
             labelMidTitle.topAnchor.constraint(equalTo: imageView.topAnchor), // labelMidTitle 顶部与 imageView 顶部对齐
-            labelMidTitle.heightAnchor.constraint(equalToConstant: 55), // labelMidTitle 高度设为 55 点
+            labelMidTitle.heightAnchor.constraint(equalToConstant: 35), // labelMidTitle 高度设为 55 点
             labelMidTitle.widthAnchor.constraint(equalTo: videoView.widthAnchor, constant: -130),
             
             // labelMidOther 的约束
             labelMidOther.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5), // labelMidOther 左边与 imageView 右边相距 5 点
-            labelMidOther.topAnchor.constraint(equalTo: self.topAnchor, constant: 240), // labelMidOther 顶部与 labelMidTitle 底部相距 0 点
-            labelMidOther.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0), // 底部固定在 VideoFrameView 的底部並設置間距為 20
+            labelMidOther.topAnchor.constraint(equalTo: labelMidTitle.bottomAnchor, constant: 8), // labelMidOther 顶部与 labelMidTitle 底部相距 0 点
+            labelMidOther.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18), // 底部固定在 VideoFrameView 的底部並設置間距為 -18
             labelMidOther.widthAnchor.constraint(equalTo: videoView.widthAnchor, constant: -130)
 
         ])
