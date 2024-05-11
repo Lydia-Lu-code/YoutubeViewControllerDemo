@@ -37,7 +37,9 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ShortsTableViewCell", for: indexPath) as! ShortsTableViewCell
 
-    // Configure the cell...
+    // 在這裡將視頻內容設置給 cell
+    cell.videoContent = videoContent
+    
     cell.setupViews()
 
     return cell
