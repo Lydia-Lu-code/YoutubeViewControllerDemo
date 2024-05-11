@@ -8,7 +8,7 @@ protocol HomeVCDelegate: AnyObject {
 }
 
 class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTransitioningDelegate {
-
+    
     weak var delegate: HomeVCDelegate?
     
     let buttonTitles = ["﻿📍﻿", "﻿全部", "﻿音樂", "﻿遊戲", "﻿合輯", "﻿直播中", "﻿動畫", "﻿寵物", "﻿最新上傳", "讓你耳目一新的影片", "﻿提供意見"]
@@ -26,17 +26,17 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
     }()
     
     lazy var collectionView: UICollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.minimumInteritemSpacing = 10
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.showsHorizontalScrollIndicator = false
-
-            collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "ButtonCell")
-            return collectionView
-        }()
-
-
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "ButtonCell")
+        return collectionView
+    }()
+    
+    
     // 定義一個 UILabel 用於顯示播放器符號
     lazy var playerSymbolImageView: UIImageView = {
         let imageView = UIImageView()
@@ -49,7 +49,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
         return imageView
     }()
-
+    
     // 定義一個 UILabel 用於顯示 "Shorts" 文字
     lazy var shortsLbl: UILabel = {
         let label = UILabel()
@@ -60,8 +60,8 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         label.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
         return label
     }()
-
-
+    
+    
     // 定義一個 StackView 用於將播放器符號和 "Shorts" 文字放在一起
     lazy var shortsStackView: UIStackView = {
         let stackView = UIStackView()
@@ -74,20 +74,20 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         stackView.addArrangedSubview(shortsLbl)
         return stackView
     }()
-
     
     
-    let videoFrameView = VideoFrameView()
+    
+    let singleVideoFrameView = VideoFrameView()
     let shortsFrameCollectionView = ShortsFrameCollectionView()
-    var videoFrameViews = [VideoFrameView]()
+    var otherVideoFrameViews = [VideoFrameView]()
     var menuViewController: MenuVC?
     var notificationLogViewController = NotificationLogVC()
     
     
-    var snippetChannelId: String = ""
+//    var snippetChannelId: String = ""
     var viewCount: String = ""
     var calculateDaysSinceUpload: String = ""
-
+    
     var previousVideoFrameView: UIView?
     
     override func viewDidLoad() {
@@ -96,7 +96,7 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         let screenWidth = UIScreen.main.bounds.width
         let width = screenWidth * 0.75
         view.frame = CGRect(x: 0, y: 0, width: width, height: UIScreen.main.bounds.height)
-
+        
         
         view.backgroundColor = .systemBackground
         
@@ -106,11 +106,11 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
         setupRightBarButtonItems() // 調用新的方法來設置右側的 UIBarButtonItem
         fetchYouTubeData()
-}
-
+    }
+    
     @objc func didTapMenuButton() {
         delegate?.didTapMenuButton()
         delegate?.didTapNotificationLog﻿ButtonMid()
@@ -119,16 +119,28 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(collectionView)
-        contentView.addSubview(videoFrameView)
+        contentView.addSubview(singleVideoFrameView)
         contentView.addSubview(shortsStackView)
         contentView.addSubview(shortsFrameCollectionView)
+        // 將 otherVideoFrameViews 中的每個 VideoFrameView 添加到 contentView 中
+        
+        
+        // 確保 otherVideoFrameViews 至少有四個元素
+        while otherVideoFrameViews.count < 4 {
+            let videoFrame = VideoFrameView()
+            otherVideoFrameViews.append(videoFrame)
+        }
+        for videoFrameView in otherVideoFrameViews {
+            contentView.addSubview(videoFrameView)
+        }
+        
         collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
     }
     private func setLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        videoFrameView.translatesAutoresizingMaskIntoConstraints = false
+        singleVideoFrameView.translatesAutoresizingMaskIntoConstraints = false
         shortsFrameCollectionView.translatesAutoresizingMaskIntoConstraints = false
         
         // 计算所有按钮宽度的总和
@@ -140,71 +152,52 @@ class HomeVC: UIViewController,ButtonCollectionCellDelegate, UIViewControllerTra
         }
         
         // 計算15個 videoFrameView2 的高度總和
-        let videoFrameView2TotalHeight: CGFloat = 15 * 280 // 假設每個 videoFrameView2 的高度是 280
-
+        let videoFrameView2TotalHeight: CGFloat = 4 * 300 // 假設每個 videoFrameView2 的高度是 300
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-
+            
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.bottomAnchor.constraint(equalTo: shortsFrameCollectionView.bottomAnchor), // 更新這裡
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-
+            
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.heightAnchor.constraint(equalToConstant: 60),
+            
+            singleVideoFrameView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            singleVideoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            singleVideoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            singleVideoFrameView.heightAnchor.constraint(equalToConstant: 300),
 
-            videoFrameView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            videoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            videoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            videoFrameView.heightAnchor.constraint(equalTo: videoFrameView.heightAnchor),
-
+            
             // imageView 布局
-            shortsStackView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
+//            shortsStackView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
+            shortsStackView.topAnchor.constraint(equalTo: singleVideoFrameView.bottomAnchor),
             shortsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             shortsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            shortsStackView.heightAnchor.constraint(equalToConstant: 50), // 設定高度為 160
-
+            shortsStackView.heightAnchor.constraint(equalToConstant: 60), // 設定高度為 160
+            
             shortsFrameCollectionView.topAnchor.constraint(equalTo: shortsStackView.bottomAnchor),
             shortsFrameCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             shortsFrameCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             shortsFrameCollectionView.heightAnchor.constraint(equalToConstant: 600),
             
+            
         ])
-//        setupVideoFrameViewsLayout()
+        //        setupVideoFrameViewsLayout()
         
         // 設定 scrollView 的 contentSize
+//        let contentHeight = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         let contentHeight = contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height + videoFrameView2TotalHeight
         scrollView.contentSize = CGSize(width: view.bounds.width, height: contentHeight)
     }
     
-    
-
-//    private func setupVideoFrameViewsLayout() {
-//        var previousVideoFrameView: UIView = shortsFrameCollectionView
-//
-//        for _ in 0..<4 {
-//
-//                let videoFrame = VideoFrameView()
-//                contentView.addSubview(videoFrame)
-//                videoFrame.translatesAutoresizingMaskIntoConstraints = false
-//                
-//                NSLayoutConstraint.activate([
-//                    videoFrame.topAnchor.constraint(equalTo: previousVideoFrameView.bottomAnchor),
-//                    videoFrame.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//                    videoFrame.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//                    videoFrame.heightAnchor.constraint(equalTo: videoFrameView.heightAnchor)
-//                ])
-//                
-//                previousVideoFrameView = videoFrame
-//            
-//            
-//        }
-//    }
 }
 
 extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -250,11 +243,11 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollect
     }
     
     
-
+    
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return SlideInTransition()
     }
-
+    
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil
     }
@@ -322,10 +315,19 @@ extension HomeVC {
         }
         return ""
     }
- 
-    func loadDataVideoFrameView(withTitle title: String, thumbnailURL: String, accountImageURL: String, viewCount: String, daysSinceUpload: String) {
-        // 將資料設置到 labelMidTitle 中
+    
+    func loadDataVideoFrameView(withTitle title: String, thumbnailURL: String, channelTitle: String, accountImageURL: String, viewCount: String, daysSinceUpload: String, atIndex index: Int) {
+        guard index < otherVideoFrameViews.count else {
+            print("Index out of range for otherVideoFrameViews.")
+            return
+        }
+        
+        // 根據索引從 otherVideoFrameViews 中獲取相應的 VideoFrameView
+        let videoFrameView = otherVideoFrameViews[index]
+        
+        // 將資料設置到 VideoFrameView 中
         videoFrameView.labelMidTitle.text = title
+        videoFrameView.labelMidOther.text = "\(channelTitle)．觀看次數： \(viewCount)次．\(daysSinceUpload)前"
         
         // 設置影片縮圖
         if let thumbnailURL = URL(string: thumbnailURL) {
@@ -340,7 +342,7 @@ extension HomeVC {
                 }
                 DispatchQueue.main.async {
                     // 設置影片縮圖
-                    self.videoFrameView.videoView.backgroundColor = UIColor(patternImage: image)
+                    videoFrameView.videoView.image = image
                 }
             }.resume()
         } else {
@@ -360,242 +362,239 @@ extension HomeVC {
                 }
                 DispatchQueue.main.async {
                     // 設置帳號圖片
-                    self.videoFrameView.imageView.image = image
+                    videoFrameView.imageView.image = image
                 }
             }.resume()
         } else {
             print("Invalid account image URL.")
         }
-        
-        // 設置觀看次數和上傳天數
-        videoFrameView.labelMidOther.text = "\(snippetChannelId)．觀看次數： \(viewCount)次．\(daysSinceUpload)"
     }
-
+    
     
     func fetchYouTubeData() {
-
         let apiKey = "AIzaSyC1LUGmn3kwNecr13UCLwOQEDhn7h6r5Co"
         
         let topUrlString = "https://www.googleapis.com/youtube/v3/videos?key=\(apiKey)&chart=mostPopular&maxResults=5&regionCode=TW&part=snippet,contentDetails,statistics"
         
-
+        
         guard let url = URL(string: topUrlString) else {
             print("無效的 URL")
             return
         }
-
+        
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("錯誤: \(error.localizedDescription)")
                 return
             }
-
+            
             guard let data = data else {
                 print("未收到數據")
                 return
             }
-        
+            
             
             let dateFormatter = ISO8601DateFormatter()
-                dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+            dateFormatter.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
             
-            
+            // 在 do-catch 塊中
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode(Welcome.self, from: data)
-
-                // 從第二個影片開始處理
-                let videos = result.items.dropFirst()
-
-                DispatchQueue.main.async {
-                    var previousVideoFrameView: UIView? = self.shortsFrameCollectionView
-
-                    // 確保有足夠的影片框架
-                    for (_, video) in videos.enumerated() {
+                
+                let videos = result.items
+                
+                DispatchQueue.main.async { [self] in
+                    guard !videos.isEmpty else {
+                        return
+                    }
+                    
+                    // 處理第一個視圖（singleVideoFrameView）
+                    if let firstVideo = videos.first {
+                        // 獲取第一個視圖相關的資料
+                        let videoTitle = firstVideo.snippet.title
+                        let videoChannelTitle = firstVideo.snippet.channelTitle
+                        let videoPublishTime = firstVideo.snippet.publishedAt
+                        let viewCount = firstVideo.statistics.viewCount
+                        let thumbnailURL = firstVideo.snippet.thumbnails.medium.url
+                        let accountImageURL = firstVideo.snippet.thumbnails.maxres.url
+                        let daysSinceUpload = self.calculateTimeSinceUpload(from: videoPublishTime)
+                        let convertedViewCount = convertViewCount(viewCount)
+                        
+                        // 更新 singleVideoFrameView 的資料
+                        self.loadDataVideoFrameView(withTitle: videoTitle, thumbnailURL: thumbnailURL, channelTitle: videoChannelTitle, accountImageURL: accountImageURL, viewCount: convertedViewCount, daysSinceUpload: daysSinceUpload, atIndex: 0)
+                        
+                        // 將 firstVideo 中的資料設置給 singleVideoFrameView
+                        self.singleVideoFrameView.labelMidTitle.text = videoTitle
+                        self.singleVideoFrameView.labelMidOther.text = "\(videoChannelTitle)．觀看次數： \(convertedViewCount)次．\(daysSinceUpload)前"
+                        
+                        // 設置影片縮圖
+                        if let thumbnailURL = URL(string: thumbnailURL) {
+                            URLSession.shared.dataTask(with: thumbnailURL) { data, _, error in
+                                if let error = error {
+                                    print("Error fetching thumbnail image: \(error)")
+                                    return
+                                }
+                                guard let data = data, let image = UIImage(data: data) else {
+                                    print("Failed to extract image from data.")
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    // 設置影片縮圖
+                                    self.singleVideoFrameView.videoView.image = image
+                                }
+                            }.resume()
+                        } else {
+                            print("Invalid thumbnail URL.")
+                        }
+                        
+                        // 設置帳號圖片
+                        if let accountImageURL = URL(string: accountImageURL) {
+                            URLSession.shared.dataTask(with: accountImageURL) { data, _, error in
+                                if let error = error {
+                                    print("Error fetching account image: \(error)")
+                                    return
+                                }
+                                guard let data = data, let image = UIImage(data: data) else {
+                                    print("Failed to extract image from data.")
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    // 設置帳號圖片
+                                    self.singleVideoFrameView.imageView.image = image
+                                }
+                            }.resume()
+                        } else {
+                            print("Invalid account image URL.")
+                        }
+                        
+                        // 將 previousVideoFrameView 設置為 shortsFrameCollectionView
+                        previousVideoFrameView = shortsFrameCollectionView
+                        self.collectionView.reloadData()
+                    }
+                    
+                    // 處理其他視圖（otherVideoFrameViews）
+                    for (index, video) in videos.dropFirst().enumerated() {
                         guard let previousView = previousVideoFrameView else {
                             break
                         }
-
-                        // 獲取影片相關信息
+                        
+                        let videoFrame = self.otherVideoFrameViews[index]
+                        videoFrame.translatesAutoresizingMaskIntoConstraints = false
+                        
+                        // 獲取影片相關資料
                         let videoTitle = video.snippet.title
                         let videoChannelTitle = video.snippet.channelTitle
                         let videoPublishTime = video.snippet.publishedAt
                         let viewCount = video.statistics.viewCount
-                        // 獲取縮略圖 URL 和帳戶圖片 URL
                         let thumbnailURL = video.snippet.thumbnails.medium.url
                         let accountImageURL = video.snippet.thumbnails.maxres.url
-                        
-                        
-                        // 創建並配置VideoFrameView
-                        let videoFrame = VideoFrameView()
-                        self.contentView.addSubview(videoFrame)
-                        videoFrame.translatesAutoresizingMaskIntoConstraints = false
-                        
-                        print("videoTitle = \(videoTitle),videoChannelTitle = \(videoChannelTitle), viewCount = \(viewCount)")
-                        
-                        // 調用 calculateTimeSinceUpload 方法，獲取“幾天前”字符串
                         let daysSinceUpload = self.calculateTimeSinceUpload(from: videoPublishTime)
+                        let convertedViewCount = convertViewCount(viewCount)
                         
-                       // 將標題傳遞給方法，更新 UI
-                        DispatchQueue.main.async {
-                                                self.loadDataVideoFrameView(withTitle: videoTitle, thumbnailURL: thumbnailURL, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload)
-                                            }
+                        // 更新影片框架
+                        self.loadDataVideoFrameView(withTitle: videoTitle, thumbnailURL: thumbnailURL, channelTitle: videoChannelTitle, accountImageURL: accountImageURL, viewCount: convertedViewCount, daysSinceUpload: daysSinceUpload, atIndex: index)
                         
-                        // 添加約束
+                        // 設置約束
                         NSLayoutConstraint.activate([
-                            videoFrame.topAnchor.constraint(equalTo: previousView.bottomAnchor),
+                            videoFrame.topAnchor.constraint(equalTo: previousView.bottomAnchor, constant: 300),
                             videoFrame.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
                             videoFrame.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-                            videoFrame.heightAnchor.constraint(equalTo: videoFrame.heightAnchor)
+                            videoFrame.heightAnchor.constraint(equalToConstant: 300),
                         ])
-
-                        // 更新上一個影片框架的參考
+                        
+                        // 更新 previousVideoFrameView
                         previousVideoFrameView = videoFrame
+                        self.collectionView.reloadData()
+                    }
+                    
+                    // 確保 previousVideoFrameView 不為空，並將其 bottomAnchor 連接到 shortsFrameCollectionView 的 bottomAnchor 上
+                    if let lastVideoFrameView = self.otherVideoFrameViews.last {
+                        NSLayoutConstraint.activate([
+                            lastVideoFrameView.bottomAnchor.constraint(equalTo: self.shortsFrameCollectionView.bottomAnchor)
+                        ])
                     }
                 }
+                
             } catch {
                 print("解碼錯誤：\(error)")
             }
 
-///////*****
 
 //            do {
 //                let decoder = JSONDecoder()
 //                let result = try decoder.decode(Welcome.self, from: data)
 //                
+//
 //                // 從第二個影片開始處理
 //                let videos = result.items.dropFirst()
-//                
-//
-//                
-//                DispatchQueue.main.async {
+//                DispatchQueue.main.async { [self] in
 //                    var previousVideoFrameView: UIView? = self.shortsFrameCollectionView
 //                    
 //                    // 確保有足夠的影片框架
-//                    for _ in 0..<4 {
+//                    for (index, video) in videos.enumerated() {
 //                        guard let previousView = previousVideoFrameView else {
 //                            break
 //                        }
+////                        print("VideoFrameView \(index + 1) added.")
+//                        // 獲取影片相關信息
+//                        let videoTitle = video.snippet.title
+//                        let videoChannelTitle = video.snippet.channelTitle
+//                        let videoPublishTime = video.snippet.publishedAt
+//                        let viewCount = video.statistics.viewCount
+//                        // 獲取縮略圖 URL 和帳戶圖片 URL
+//                        let thumbnailURL = video.snippet.thumbnails.medium.url
+//                        let accountImageURL = video.snippet.thumbnails.maxres.url
 //                        
-//                        let videoFrame = VideoFrameView()
-//                        self.contentView.addSubview(videoFrame)
+//                        // 取得要更新的 VideoFrameView
+//                        let videoFrame = self.otherVideoFrameViews[index]
 //                        videoFrame.translatesAutoresizingMaskIntoConstraints = false
+//
+//                        // 調用 calculateTimeSinceUpload 方法，獲取“幾天前”字符串
+//                        let daysSinceUpload = self.calculateTimeSinceUpload(from: videoPublishTime)
+//                        let convertedViewCount = convertViewCount(viewCount)
+//
 //                        
-//                        NSLayoutConstraint.activate([
-//                            videoFrame.topAnchor.constraint(equalTo: previousView.bottomAnchor),
-//                            videoFrame.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-//                            videoFrame.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-//                            videoFrame.heightAnchor.constraint(equalTo: videoFrame.heightAnchor)
-//                        ])
+//                        // 將標題傳遞給方法，更新 UI
+//                        DispatchQueue.main.async {
+//                            self.loadDataVideoFrameView(withTitle: videoTitle, thumbnailURL: thumbnailURL, channelTitle: videoChannelTitle, accountImageURL: accountImageURL, viewCount: convertedViewCount, daysSinceUpload: daysSinceUpload, atIndex: index)
+//                        }
 //                        
+//                        if index < self.otherVideoFrameViews.count {
+//                            let videoFrame = self.otherVideoFrameViews[index]
+//                            videoFrame.translatesAutoresizingMaskIntoConstraints = false
+//                            
+//                            NSLayoutConstraint.activate([
+//                                videoFrame.topAnchor.constraint(equalTo: previousView.bottomAnchor, constant: 300),
+//                                videoFrame.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+//                                videoFrame.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+//                                videoFrame.heightAnchor.constraint(equalToConstant: 300),
+//
+//                            ])
+//                        }
+//                        
+//                        // 更新上一個影片框架的參考
 //                        previousVideoFrameView = videoFrame
 //                    }
+//                    
+//                    // 確保 previousVideoFrameView 不為空，並將其 bottomAnchor 連接到 shortsFrameCollectionView 的 bottomAnchor 上
+//                    if let lastVideoFrameView = self.otherVideoFrameViews.last {
+//                        NSLayoutConstraint.activate([
+//                            lastVideoFrameView.bottomAnchor.constraint(equalTo: self.shortsFrameCollectionView.bottomAnchor)
+//                        ])
+//                    }
 //                }
+//                
 //            } catch {
 //                print("解碼錯誤：\(error)")
 //            }
-
-///////*****
-//            do {
-//                let decoder = JSONDecoder()
-//                let result = try decoder.decode(Welcome.self, from: data)
-//                
-//                var videos = result.items.dropFirst()
-//                
-//                if !result.items.isEmpty {
-//                    for (index, video) in videos.dropFirst().enumerated() { // 從第二筆開始
-//                        let videoTitle = video.snippet.title
-//                        let channelID = video.snippet.channelID
-//                        let viewCount = video.statistics.viewCount
-//                        print("videoTitle = \(videoTitle),channelID = \(channelID), viewCount = \(viewCount)")
-//                        print("**index == \(index)")
-//
-//                        if index < 4 { // 僅處理前四個影片
-//                            DispatchQueue.main.async {
-//                                let videoFrame = VideoFrameView()
-//                                self.contentView.addSubview(videoFrame)
-//                                videoFrame.translatesAutoresizingMaskIntoConstraints = false
-//
-//                                NSLayoutConstraint.activate([
-//                                    videoFrame.topAnchor.constraint(equalTo: self.shortsFrameCollectionView.bottomAnchor),
-//                                    videoFrame.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-//                                    videoFrame.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-//                                    videoFrame.heightAnchor.constraint(equalTo: videoFrame.heightAnchor)
-//                                ])
-//
-//                                self.previousVideoFrameView = videoFrame
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                
-////                if !result.items.isEmpty {
-////                    
-////                    for video in videos {
-////                        let videoTitle = video.snippet.title
-////                        let channelID = video.snippet.channelID
-////                        let viewCount = video.statistics.viewCount
-////                        print("videoTitle = \(videoTitle),channelID = \(channelID), viewCount = \(viewCount)")
-////                    }
-////                    
-////                }
-//            } catch {
-//                
-//            }
-///////*****
-//            do {
-//                // 解析返回的 JSON 数据
-//                let decoder = JSONDecoder()
-//                let result = try decoder.decode(Welcome.self, from: data)
-//
-//                if !result.items.isEmpty {
-//                    
-//                    let firstVideo = result.items[0]
-////                    let firstVideo = result.items[0]
-//                    let videoTitle = firstVideo.snippet.title
-//                    let videoChannelTitle = firstVideo.snippet.channelTitle
-//                    let videoPublishTime = firstVideo.snippet.publishedAt
-//                    let viewCount = self.convertViewCount(firstVideo.statistics.viewCount)
-//                    let thumbnailURL = firstVideo.snippet.thumbnails.maxres.url // 假設有一個 medium 縮略圖
-//                    let accountImageURL = firstVideo.snippet.thumbnails.thumbnailsDefault.url // 假設有一個 default 帳戶圖片
-//                    print("viewCount == \(viewCount)")
-//                    
-//                    // 將獲取的數據存儲到對應的變量中
-//                    self.snippetChannelId = videoChannelTitle
-//
-//                    // 調用 calculateTimeSinceUpload 方法，獲取“幾天前”字符串
-//                    let daysSinceUpload = self.calculateTimeSinceUpload(from: videoPublishTime)
-//
-//                    // 將標題傳遞給方法，更新 UI
-//                    DispatchQueue.main.async {
-//                        self.loadDataVideoFrameView(withTitle: videoTitle, thumbnailURL: thumbnailURL, accountImageURL: accountImageURL, viewCount: viewCount, daysSinceUpload: daysSinceUpload)
-//                    }
-//                    
-//                    
-//                ///
-//
-//                    
-//                    
-//                    } else {
-//                    print("No items found in the video information.")
-//                }
-//            } catch {
-//                print("Error decoding JSON: \(error)")
-//            }
-
-
         }.resume()
-
-
-        
-
     }
-
+    
+    
+    // touch Gesture 點旁邊
+    // Animation 方向是 右到左
+    
+    
 }
-
-// touch Gesture 點旁邊
-// Animation 方向是 右到左
-
-

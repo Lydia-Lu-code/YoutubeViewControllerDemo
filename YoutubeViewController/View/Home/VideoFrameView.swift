@@ -126,8 +126,9 @@ class VideoFrameView: UIView {
             
             // labelMidOther 的约束
             labelMidOther.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5), // labelMidOther 左边与 imageView 右边相距 5 点
-            labelMidOther.topAnchor.constraint(equalTo: labelMidTitle.bottomAnchor, constant: 8), // labelMidOther 顶部与 labelMidTitle 底部相距 0 点
-            labelMidOther.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18), // 底部固定在 VideoFrameView 的底部並設置間距為 -18
+            labelMidOther.topAnchor.constraint(equalTo: labelMidTitle.bottomAnchor), // labelMidOther 顶部与 labelMidTitle 底部相距 0 点
+            labelMidOther.heightAnchor.constraint(equalToConstant: 25),
+//            labelMidOther.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18),  底部固定在 VideoFrameView 的底部並設置間距為 -18
             labelMidOther.widthAnchor.constraint(equalTo: videoView.widthAnchor, constant: -130)
 
         ])
