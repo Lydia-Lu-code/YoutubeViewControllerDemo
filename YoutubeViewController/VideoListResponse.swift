@@ -1,15 +1,18 @@
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? JSONDecoder().decode(Welcome.self, from: jsonData)
+
 import Foundation
 
-// https://www.googleapis.com/youtube/v3/videos?key=AIzaSyC1LUGmn3kwNecr13UCLwOQEDhn7h6r5Co&chart=mostPopular&maxResults=5&regionCode=TW&part=snippet,contentDetails,statistics
-
-
+// MARK: - Welcome
 struct Welcome: Codable {
     let kind, etag: String
     let items: [Item]
-    let nextPageToken: String
     let pageInfo: PageInfo
 }
 
+// MARK: - Item
 struct Item: Codable {
     let kind, etag, id: String
     let snippet: Snippet
@@ -17,6 +20,7 @@ struct Item: Codable {
     let statistics: Statistics
 }
 
+// MARK: - ContentDetails
 struct ContentDetails: Codable {
     let duration, dimension, definition, caption: String
     let licensedContent: Bool
@@ -24,34 +28,37 @@ struct ContentDetails: Codable {
     let projection: String
 }
 
+// MARK: - ContentRating
 struct ContentRating: Codable {
 }
 
+// MARK: - Snippet
 struct Snippet: Codable {
 //    let publishedAt: Date
     let publishedAt: String
     let channelID, title, description: String
     let thumbnails: Thumbnails
     let channelTitle: String
-    let tags: [String]?
+    let tags: [String]
     let categoryID, liveBroadcastContent: String
     let localized: Localized
     let defaultAudioLanguage: String
-    let defaultLanguage: String?
 
     enum CodingKeys: String, CodingKey {
         case publishedAt
         case channelID = "channelId"
         case title, description, thumbnails, channelTitle, tags
         case categoryID = "categoryId"
-        case liveBroadcastContent, localized, defaultAudioLanguage, defaultLanguage
+        case liveBroadcastContent, localized, defaultAudioLanguage
     }
 }
 
+// MARK: - Localized
 struct Localized: Codable {
     let title, description: String
 }
 
+// MARK: - Thumbnails
 struct Thumbnails: Codable {
     let thumbnailsDefault, medium, high, standard: Default
     let maxres: Default
@@ -62,18 +69,19 @@ struct Thumbnails: Codable {
     }
 }
 
+// MARK: - Default
 struct Default: Codable {
     let url: String
     let width, height: Int
 }
 
+// MARK: - Statistics
 struct Statistics: Codable {
-    let viewCount: String
-//    let likeCount: String
-//    let favoriteCount: String
-//    let commentCount: String
+    let viewCount, likeCount, favoriteCount, commentCount: String
 }
 
+// MARK: - PageInfo
 struct PageInfo: Codable {
     let totalResults, resultsPerPage: Int
 }
+

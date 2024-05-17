@@ -20,7 +20,6 @@ class ShortsEmojiBtnView: UIView {
     }
     
     private func setupEmojiButtonViews() {
-//        backgroundColor = .gray
         
         // 创建垂直的 stackView
         let stackView = UIStackView()

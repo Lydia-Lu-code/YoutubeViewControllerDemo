@@ -12,7 +12,8 @@
 		00219D762BD69AAE007AC84F /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */; };
 		00254B452BEA5B52001B4041 /* VideoListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00254B442BEA5B52001B4041 /* VideoListResponse.swift */; };
 		0063E4D12BBEA5FD0086C0BA /* ShortsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D02BBEA5FD0086C0BA /* ShortsTableViewCell.swift */; };
-		0063E4D32BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D22BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift */; };
+		0063E4D32BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */; };
+		00699E9B2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00699E9A2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift */; };
 		007BB5322BB93A0000431084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5312BB93A0000431084 /* AppDelegate.swift */; };
 		007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5332BB93A0000431084 /* SceneDelegate.swift */; };
 		007BB5362BB93A0000431084 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5352BB93A0000431084 /* HomeVC.swift */; };
@@ -50,7 +51,8 @@
 		00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		00254B442BEA5B52001B4041 /* VideoListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListResponse.swift; sourceTree = "<group>"; };
 		0063E4D02BBEA5FD0086C0BA /* ShortsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsTableViewCell.swift; sourceTree = "<group>"; };
-		0063E4D22BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsFrameCollectionView.swift; sourceTree = "<group>"; };
+		0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShortsFrameCollectionView.swift; sourceTree = "<group>"; };
+		00699E9A2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShortsCollectionViewCell.swift; sourceTree = "<group>"; };
 		007BB52E2BB93A0000431084 /* YoutubeViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		007BB5312BB93A0000431084 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		007BB5332BB93A0000431084 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,13 +134,14 @@
 		008551E12BC0F52800DA3913 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */,
+				00699E9A2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift */,
 				00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */,
 				00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */,
 				00219D6F2BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift */,
 				00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */,
 				00219D712BD62DF7007AC84F /* NotificationCustomView.swift */,
 				00E63AB12BD015930019CB6D /* SearchVC.swift */,
-				0063E4D22BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift */,
 				007BB5492BBAA1F200431084 /* VideoFrameView.swift */,
 				007BB5472BB952F700431084 /* ButtonCollectionViewCell.swift */,
 				00E63AA72BCCDAD00019CB6D /* ContainerVC.swift */,
@@ -301,6 +304,7 @@
 				007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */,
 				008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */,
 				008551EA2BC1370900DA3913 /* ShortsEmojiBtnView.swift in Sources */,
+				00699E9B2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift in Sources */,
 				00E63AB22BD015930019CB6D /* SearchVC.swift in Sources */,
 				00254B452BEA5B52001B4041 /* VideoListResponse.swift in Sources */,
 				007D0EEC2BE4E9160067804D /* YouTubeSearchResult.swift in Sources */,
@@ -309,7 +313,7 @@
 				00C3814B2BDBA9E6009A47AF /* ContentHeaderView.swift in Sources */,
 				0063E4D12BBEA5FD0086C0BA /* ShortsTableViewCell.swift in Sources */,
 				00C3813D2BD948AC009A47AF /* SubscribeHoriCollectionView.swift in Sources */,
-				0063E4D32BBEAE5D0086C0BA /* ShortsFrameCollectionView.swift in Sources */,
+				0063E4D32BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift in Sources */,
 				00C381AF2BDFE721009A47AF /* SlideInTransition.swift in Sources */,
 				00C3814D2BDBB218009A47AF /* ContentTopView.swift in Sources */,
 				00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */,
