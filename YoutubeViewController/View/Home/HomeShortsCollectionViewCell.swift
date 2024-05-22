@@ -1,28 +1,36 @@
-//
-//  ShortsCollectionViewCell.swift
-//  YoutubeViewController
-//
-//  Created by Lydia Lu on 2024/5/14.
-//
+
 
 import UIKit
 
 class HomeShortsCollectionViewCell: UICollectionViewCell {
-//    var videoContent: String?
-//    weak var viewController: UIViewController? // 添加 viewController 屬性
-
-    var searchItem: SearchItem? // 將 videoContent 屬性改為 SearchItem
-      
     
-    public let cellIdentifier = "HomeShortsCollectionViewCell"
+    public static let cellIdentifier = "HomeShortsCollectionViewCell"
     
     let button: UIButton = {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .darkGray
         button.translatesAutoresizingMaskIntoConstraints = false
+//        // 設置圖片的 contentMode 為 scaleAspectFill
+//        button.imageView?.contentMode = .center
+//        // 添加圖片約束
+//            button.contentVerticalAlignment = .fill
+//            button.contentHorizontalAlignment = .fill
+        // 設置圖片約束
+//        if let imageView = button.imageView {
+//            imageView.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                imageView.topAnchor.constraint(equalTo: button.topAnchor), // 圖片頂部對齊按鈕頂部
+//                imageView.bottomAnchor.constraint(equalTo: button.bottomAnchor), // 圖片底部對齊按鈕底部
+//                imageView.centerXAnchor.constraint(equalTo: button.centerXAnchor), // 圖片中心點與按鈕中心點水平對齊
+//                imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1.0) // 圖片寬度與高度等比例拉長
+//            ])
+//        }
+        
         return button // 返回創建的按鈕實例
     }()
+    
+    
     
     // 添加圖像視圖
     let imageView: UIImageView = {
@@ -43,25 +51,19 @@ class HomeShortsCollectionViewCell: UICollectionViewCell {
         return label // 返回創建的標籤實例
     }()
     
-//    
+  
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButton()
     }
-//    
+ 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupButton()
     }
 
     
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
     public func setupButton() {
-        
-        
         contentView.addSubview(button)
         button.addSubview(imageView)
         button.addSubview(titleLabel)
@@ -86,6 +88,18 @@ class HomeShortsCollectionViewCell: UICollectionViewCell {
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
+        // 設置按鈕的高度與圖片的高度相同
+        let imageHeightConstraint = button.imageView?.heightAnchor.constraint(equalTo: button.heightAnchor)
+        imageHeightConstraint?.isActive = true
+        
+        // 設置圖片的中心點與按鈕的中心點對齊
+        let centerXConstraint = button.imageView?.centerXAnchor.constraint(equalTo: button.centerXAnchor)
+        let centerYConstraint = button.imageView?.centerYAnchor.constraint(equalTo: button.centerYAnchor)
+        centerXConstraint?.isActive = true
+        centerYConstraint?.isActive = true
+        
+
+        
         // 添加按鈕點擊事件處理程序
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
@@ -103,34 +117,6 @@ class HomeShortsCollectionViewCell: UICollectionViewCell {
     @objc private func buttonTapped() {
         
         print("Button tapped")
-//        // 創建一個新的 ShortsTableViewController 的實例
-//        let shortsTableViewController = ShortsTableViewController()
-//        
-//        // 如果有需要，將影片內容傳遞給 ShortsTableViewController
-//        shortsTableViewController.videoContent = videoContent
-//        
-//        // 確保 viewController 不為 nil
-//        guard let viewController = self.viewController else {
-//            // 如果 viewController 為 nil，可以輸出一條日誌以警告開發者
-//            print("Error: viewController is nil.")
-//            return
-//        }
-//        
-//        // 從當前視圖控制器中顯示 ShortsTableViewController
-//        viewController.present(shortsTableViewController, animated: true, completion: nil)
-    }
-    
-    func configure(with item: SearchItem) {
-        titleLabel.text = item.snippet.title
-        if let url = URL(string: item.snippet.thumbnails.medium.url) {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data {
-                    DispatchQueue.main.async {
-                        self.imageView.image = UIImage(data: data)
-                    }
-                }
-            }.resume()
-        }
     }
     
 }

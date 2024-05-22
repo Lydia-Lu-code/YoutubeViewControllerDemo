@@ -183,7 +183,7 @@ class ContentTableViewController: UITableViewController {
     // MARK: - Table view data source
         
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 6 // 5個部分
+        return 9 // 5個部分
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -225,14 +225,140 @@ class ContentTableViewController: UITableViewController {
        
             return headerView
         } else {
+            
             let headerView = ContentHeaderView()
             headerView.delegate = self
-            // 可以根據需要設置按鈕的標題、樣式等屬性
-            headerView.leftButton.setTitle("Left Button", for: .normal)
-            headerView.rightButton.setTitle("Right Button", for: .normal)
-            headerView.backgroundColor = .lightGray
-            // 設置按鈕的點擊事件等
             
+            // SF Symbols array
+            let sfSymbols = [
+                "eye.fill",        // 觀看歷史
+                "list.bullet",     // 播放清單
+                "film.fill",       // 你的影片
+                "arrow.down.circle", // 已下載的內容
+                "tv.fill",         // 你的電影
+                "crown.fill",      // Premium 會員福利
+                "clock.fill",      // 已觀看時間
+                "bubble.left.fill" // 說明和意見回饋
+            ]
+            
+            // Create attributed string with SF Symbol and text
+            func attributedTitle(title: String, symbol: String) -> NSAttributedString {
+                let imageAttachment = NSTextAttachment()
+                imageAttachment.image = UIImage(systemName: symbol)
+                let imageString = NSAttributedString(attachment: imageAttachment)
+                let titleString = NSAttributedString(string: " \(title)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+                let completeString = NSMutableAttributedString()
+                completeString.append(imageString)
+                completeString.append(titleString)
+                return completeString
+            }
+            
+            // Set different button titles and symbols for each section
+            switch section {
+            case 1:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "觀看歷史", symbol: sfSymbols[0]), for: .normal)
+                headerView.rightButton.setTitle("查看全部", for: .normal)
+            case 2:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "播放清單", symbol: sfSymbols[1]), for: .normal)
+                headerView.rightButton.setTitle("查看全部", for: .normal)
+            case 3:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "你的影片", symbol: sfSymbols[2]), for: .normal)
+                headerView.rightButton.setTitle(" ", for: .normal)
+            case 4:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "已下載的內容", symbol: sfSymbols[3]), for: .normal)
+                headerView.rightButton.setTitle(" ", for: .normal)
+            case 5:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "你的電影", symbol: sfSymbols[4]), for: .normal)
+                headerView.rightButton.setTitle(" ", for: .normal)
+            case 6:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "Premium 會員福利", symbol: sfSymbols[5]), for: .normal)
+                headerView.rightButton.setTitle(" ", for: .normal)
+            case 7:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "已觀看時間", symbol: sfSymbols[6]), for: .normal)
+                headerView.rightButton.setTitle(" ", for: .normal)
+            case 8:
+                headerView.leftButton.setAttributedTitle(attributedTitle(title: "說明和意見回饋", symbol: sfSymbols[7]), for: .normal)
+                headerView.rightButton.setTitle(" ", for: .normal)
+            default:
+                break
+            }
+            
+            
+//            // Define SF Symbols for each case
+//            let sfSymbols = [
+//                3: "video.fill",
+//                4: "square.and.arrow.down.fill",
+//                5: "film.fill",
+//                6: "crown.fill",
+//                7: "clock.fill",
+//                8: "questionmark.circle.fill"
+//            ]
+//            
+//            // Get SF Symbol and title for each section
+//            let titlesAndSymbols: [(title: String, symbol: String?)] = [
+//                (title: "觀看歷史", symbol: nil),
+//                (title: "播放清單", symbol: nil),
+//                (title: "你的影片", symbol: sfSymbols[3]),
+//                (title: "已下載的內容", symbol: sfSymbols[4]),
+//                (title: "你的電影", symbol: sfSymbols[5]),
+//                (title: "Premium會員福利", symbol: sfSymbols[6]),
+//                (title: "已觀看時間", symbol: sfSymbols[7]),
+//                (title: "說明和意見回饋", symbol: sfSymbols[8])
+//            ]
+//            
+//            // Set titles and symbols
+//            if section >= 1 && section < titlesAndSymbols.count {
+//                let title = titlesAndSymbols[section - 1].title
+//                if let symbolName = titlesAndSymbols[section - 1].symbol {
+//                    let symbol = UIImage(systemName: symbolName)
+//                    let attachment = NSTextAttachment()
+//                    attachment.image = symbol
+//                    let attachmentString = NSAttributedString(attachment: attachment)
+//                    let titleString = NSAttributedString(string: " \(title)")
+//                    let fullString = NSMutableAttributedString()
+//                    fullString.append(attachmentString)
+//                    fullString.append(titleString)
+//                    headerView.leftButton.setAttributedTitle(fullString, for: .normal)
+//                } else {
+//                    headerView.leftButton.setTitle(title, for: .normal)
+//                }
+//                
+//                headerView.rightButton.setTitle("查看全部", for: .normal)
+//            }
+//            
+            
+            
+            // 根据不同的 section 设置不同的按钮标题
+//            switch section {
+//            case 1:
+//                headerView.leftButton.setTitle("觀看歷史", for: .normal)
+//                headerView.rightButton.setTitle("查看全部", for: .normal)
+//            case 2:
+//                headerView.leftButton.setTitle("﻿播放清單", for: .normal)
+//                headerView.rightButton.setTitle("﻿查看全部", for: .normal)
+//            case 3:
+//                headerView.leftButton.setTitle("﻿你的影片", for: .normal)
+//                headerView.rightButton.setTitle("﻿ ", for: .normal)
+//            case 4:
+//                headerView.leftButton.setTitle("﻿已下載的內容", for: .normal)
+//                headerView.rightButton.setTitle("﻿ ", for: .normal)
+//            case 5:
+//                headerView.leftButton.setTitle("﻿你的電影", for: .normal)
+//                headerView.rightButton.setTitle("﻿ ", for: .normal)
+//            case 6:
+//                headerView.leftButton.setTitle("﻿Premium﻿會員福利", for: .normal)
+//                headerView.rightButton.setTitle("﻿ ", for: .normal)
+//            case 7:
+//                headerView.leftButton.setTitle("﻿已觀看時間", for: .normal)
+//                headerView.rightButton.setTitle(" ", for: .normal)
+//            case 8:
+//                headerView.leftButton.setTitle("說明和意見﻿回饋", for: .normal)
+//                headerView.rightButton.setTitle(" ", for: .normal)
+//            default:
+//                break
+//            }
+            
+
             return headerView
         }
     }

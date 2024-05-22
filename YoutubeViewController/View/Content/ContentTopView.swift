@@ -14,7 +14,7 @@ class ContentTopView: UIView {
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .darkGray
+//        view.backgroundColor = .darkGray
         return view
     }()
     
@@ -35,16 +35,17 @@ class ContentTopView: UIView {
         label.textColor = .white // 設定文字顏色
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "Label"
+        label.text = "Lydia"
         return label
     }()
 
     lazy var button: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Button", for: .normal)
-        button.backgroundColor = .orange
-        button.setTitleColor(.blue, for: .normal) // 設定按鈕文字顏色
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        button.setTitle("﻿@user-12345678﻿．﻿ｕ﻿瀏覽頻道﻿ ﻿>﻿ ", for: .normal)
+//        button.backgroundColor = .orange
+        button.setTitleColor(.white, for: .normal) // 設定按鈕文字顏色
         return button
     }()
     
@@ -63,36 +64,55 @@ class ContentTopView: UIView {
     lazy var btn1: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Button1", for: .normal)
-        button.backgroundColor = .systemYellow
-        button.setTitleColor(.blue, for: .normal) // 設定按鈕文字顏色
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitle("切換帳戶", for: .normal)
+        button.setTitleColor(.white, for: .normal) // 設定按鈕文字顏色
+        button.layer.cornerRadius = 15 // 设置圆角
+        button.clipsToBounds = true // 确保子视图被裁剪到圆角
+//        button.sizeToFit() // 自动调整按钮大小以适应内容
+        button.backgroundColor = .darkGray
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15) // 设置按钮内容的内边距
+
         return button
     }()
-    
+
     lazy var btn2: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Button2", for: .normal)
-        button.backgroundColor = .systemYellow
-        button.setTitleColor(.blue, for: .normal) // 設定按鈕文字顏色
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitle("﻿Google﻿帳戶", for: .normal)
+        button.setTitleColor(.white, for: .normal) // 設定按鈕文字顏色
+        button.layer.cornerRadius = 15 // 设置圆角
+        button.clipsToBounds = true // 确保子视图被裁剪到圆角
+//        button.sizeToFit() // 自动调整按钮大小以适应内容
+        button.backgroundColor = .darkGray
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15) // 设置按钮内容的内边距
+
         return button
     }()
-    
+
     lazy var btn3: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Button3", for: .normal)
-        button.backgroundColor = .systemYellow
-        button.setTitleColor(.blue, for: .normal) // 設定按鈕文字顏色
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        button.setTitle("﻿啟用無痕視窗", for: .normal)
+        button.setTitleColor(.white, for: .normal) // 設定按鈕文字顏色
+        button.layer.cornerRadius = 15 // 设置圆角
+        button.clipsToBounds = true // 确保子视图被裁剪到圆角
+//        button.sizeToFit()  // 自动调整按钮大小以适应内容
+        button.backgroundColor = .darkGray
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15) // 设置按钮内容的内边距
+
         return button
     }()
     
+
     lazy var bottomStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.spacing = 15
         return stackView
     }()

@@ -52,7 +52,44 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             return imageView
         }()
         
-
+    // 定義一個 UILabel 用於顯示播放器符號
+    lazy var playerSymbolImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "play.circle")
+        imageView.tintColor = UIColor.systemBlue
+        imageView.widthAnchor.constraint(equalToConstant: 35).isActive = true // 設置寬度為 50
+        imageView.heightAnchor.constraint(equalToConstant: 35).isActive = true // 設置高度為 50
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
+        return imageView
+    }()
+    
+    // 定義一個 UILabel 用於顯示 "Shorts" 文字
+    lazy var shortsLbl: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Shorts"
+        label.textAlignment = .left
+        label.font = UIFont.boldSystemFont(ofSize: 18) // 設置粗體 18PT
+        label.setContentCompressionResistancePriority(.required, for: .horizontal) // 設置內容壓縮抗壓縮性
+        return label
+    }()
+    
+    
+    // 定義一個 StackView 用於將播放器符號和 "Shorts" 文字放在一起
+    lazy var shortsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8 // 設置元件間距
+        stackView.distribution = .fill // 將分佈設置為填充
+        stackView.alignment = .center // 將對齊方式設置為居中對齊
+        stackView.addArrangedSubview(playerSymbolImageView)
+        stackView.addArrangedSubview(shortsLbl)
+        return stackView
+    }()
+    
         
 //        let homeTopItemView = HomeTopItemView()
         let subscribeSecItemView = SubscribeSecItemView()
@@ -192,7 +229,8 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             contentView.addSubview(subscribeSecItemView)
             contentView.addSubview(collectionView)
             contentView.addSubview(videoFrameView)
-            contentView.addSubview(imageView)
+            contentView.addSubview(shortsStackView)
+//            contentView.addSubview(imageView)
             contentView.addSubview(subscribeHoriCollectionView)
             collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
             
@@ -207,6 +245,7 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             subscribeSecItemView.translatesAutoresizingMaskIntoConstraints = false
             collectionView.translatesAutoresizingMaskIntoConstraints = false
             videoFrameView.translatesAutoresizingMaskIntoConstraints = false
+            shortsStackView.translatesAutoresizingMaskIntoConstraints = false
             subscribeHoriCollectionView.translatesAutoresizingMaskIntoConstraints = false
             
             // 计算所有按钮宽度的总和
@@ -218,7 +257,7 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             }
             
             // 計算15個 videoFrameView2 的高度總和
-            let videoFrameView2TotalHeight: CGFloat = 15 * 280 // 假設每個 videoFrameView2 的高度是 280
+            let videoFrameView2TotalHeight: CGFloat = 5 * 300 + 4 * 20 // 假設每個 videoFrameView2 的高度是 280
 
             NSLayoutConstraint.activate([
                 scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -247,15 +286,15 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
                 videoFrameView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
                 videoFrameView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 videoFrameView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                videoFrameView.heightAnchor.constraint(equalToConstant: 280),
+                videoFrameView.heightAnchor.constraint(equalToConstant: 300),
 
-                // imageView 布局
-                imageView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
-                imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                imageView.heightAnchor.constraint(equalToConstant: 70), // 設定高度為 160
+                // shortsStackView 布局
+                shortsStackView.topAnchor.constraint(equalTo: videoFrameView.bottomAnchor),
+                shortsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                shortsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                shortsStackView.heightAnchor.constraint(equalToConstant: 70), // 設定高度為 160
 
-                subscribeHoriCollectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+                subscribeHoriCollectionView.topAnchor.constraint(equalTo: shortsStackView.bottomAnchor),
                 subscribeHoriCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 subscribeHoriCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
                 subscribeHoriCollectionView.heightAnchor.constraint(equalToConstant: 300),
@@ -271,19 +310,20 @@ class SubscribeVC: UIViewController, ButtonCollectionCellDelegate {
             scrollView.contentSize = CGSize(width: view.bounds.width, height: contentHeight)
         }
     
+    
     private func setupVideoFrameViewsLayout() {
         var previousHoriCollectionView: UIView = subscribeHoriCollectionView
 
-        for _ in 0..<15 {
+        for _ in 0..<5 {
             let videoFrame = VideoFrameView()
             contentView.addSubview(videoFrame)
             videoFrame.translatesAutoresizingMaskIntoConstraints = false
 
             NSLayoutConstraint.activate([
-                videoFrame.topAnchor.constraint(equalTo: previousHoriCollectionView.bottomAnchor),
+                videoFrame.topAnchor.constraint(equalTo: previousHoriCollectionView.bottomAnchor, constant: 15),
                 videoFrame.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 videoFrame.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-                videoFrame.heightAnchor.constraint(equalToConstant: 280)
+                videoFrame.heightAnchor.constraint(equalToConstant: 300)
             ])
 
             previousHoriCollectionView = videoFrame

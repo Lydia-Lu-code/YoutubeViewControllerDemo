@@ -11,7 +11,7 @@ class ShortsBtnView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupEmojiBtnViews()
+        setupAccountView()
     }
     
     required init?(coder: NSCoder) {
@@ -21,25 +21,31 @@ class ShortsBtnView: UIView {
     lazy var imageView :UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        imgView.backgroundColor = UIColor.red
+        imgView.image = UIImage(named: "image1")
+//        imgView.backgroundColor = UIColor.red
         return imgView
     }()
     
     let accountButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.backgroundColor = .red
-        btn.setTitle("account", for: .normal)
+        btn.setTitle("", for: .normal)
         btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14) // 調整字體大小
         return btn
     }()
+
 
     let subscriptionButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-//        btn.backgroundColor = .red
+        btn.backgroundColor = .darkGray
         btn.setTitle("訂閱", for: .normal)
         btn.setTitleColor(.white, for: .normal)
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) // 設置文字前後各+5
+        btn.layer.cornerRadius = 15 // 設置按鈕為橢圓形，半徑為按鈕高度的一半，假設高度是30
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 14) // 調整字體大小
+        btn.clipsToBounds = true // 確保按鈕邊界是圓角
         return btn
     }()
     
@@ -47,7 +53,7 @@ class ShortsBtnView: UIView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = 5
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(accountButton)
         stackView.addArrangedSubview(subscriptionButton)
@@ -57,10 +63,9 @@ class ShortsBtnView: UIView {
     let txtLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints  = false
-//        lbl.backgroundColor = .orange
         lbl.text = ".txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt .txt "
-        lbl.numberOfLines = 2
-        lbl.textColor = .white // 修改此行
+        lbl.numberOfLines = 0 // 將行數設置為0以啟用自動調整高度
+        lbl.textColor = .white
         return lbl
     }()
     
@@ -87,15 +92,15 @@ class ShortsBtnView: UIView {
          return stackView
      }()
  
-    private func setupEmojiBtnViews() {
-        
-        self.addSubview(stackView)
+    private func setupAccountView() {
+        addSubview(stackView)
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 140) // 設置總高度為 140
+            stackView.heightAnchor.constraint(equalToConstant: 140), // 設置總高度為 140
+            subscriptionButton.heightAnchor.constraint(equalToConstant: 30)
 
         ])
         

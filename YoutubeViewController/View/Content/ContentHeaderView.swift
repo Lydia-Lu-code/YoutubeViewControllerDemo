@@ -24,7 +24,7 @@ class ContentHeaderView: UIView {
     let leftButton: UIButton = {
         let button = UIButton()
         button.setTitle("Left Button", for: .normal)
-        button.backgroundColor = .systemBlue
+//        button.backgroundColor = .systemBlue
 
         button.translatesAutoresizingMaskIntoConstraints = false
         // 添加按鈕的其他設置...
@@ -34,7 +34,7 @@ class ContentHeaderView: UIView {
     let rightButton: UIButton = {
         let button = UIButton()
         button.setTitle("Right Button", for: .normal)
-        button.backgroundColor = .brown
+//        button.backgroundColor = .brown
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(turnPageAction), for: .touchUpInside)
