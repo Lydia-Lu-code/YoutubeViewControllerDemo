@@ -14,9 +14,7 @@
 		0063E4D12BBEA5FD0086C0BA /* ShortsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D02BBEA5FD0086C0BA /* ShortsTableViewCell.swift */; };
 		0063E4D32BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */; };
 		00699E9B2BF32621007CF3CB /* ShortsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00699E9A2BF32621007CF3CB /* ShortsCollectionViewCell.swift */; };
-		0078092C2BFEE90200426C7D /* SubscribeVC-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078092B2BFEE90100426C7D /* SubscribeVC-UB.swift */; };
 		007809302BFEEBF200426C7D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078092F2BFEEBF200426C7D /* BaseViewController.swift */; };
-		007809322C00521A00426C7D /* ButtonCollectionViewCell-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007809312C00521A00426C7D /* ButtonCollectionViewCell-UB.swift */; };
 		007BB5322BB93A0000431084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5312BB93A0000431084 /* AppDelegate.swift */; };
 		007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5332BB93A0000431084 /* SceneDelegate.swift */; };
 		007BB5362BB93A0000431084 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5352BB93A0000431084 /* HomeVC.swift */; };
@@ -34,8 +32,6 @@
 		008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551EE2BC15AB600DA3913 /* AddCollectionView.swift */; };
 		008551F22BC15C7D00DA3913 /* SubscribeSecItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */; };
 		00867CDB2BFCE60700BCD369 /* STVWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00867CDA2BFCE60700BCD369 /* STVWelcome.swift */; };
-		008D384A2C0242960014521F /* ShortsTableViewController-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008D38492C0242960014521F /* ShortsTableViewController-UB.swift */; };
-		008D384C2C02E2FA0014521F /* BaseViewController-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008D384B2C02E2FA0014521F /* BaseViewController-UB.swift */; };
 		00C3813B2BD90E2D009A47AF /* ShortsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */; };
 		00C3813D2BD948AC009A47AF /* SubscribeHoriCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3813C2BD948AC009A47AF /* SubscribeHoriCollectionView.swift */; };
 		00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */; };
@@ -48,7 +44,6 @@
 		00E63AB22BD015930019CB6D /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AB12BD015930019CB6D /* SearchVC.swift */; };
 		5BD6BAC42C0AFE2100AD63A9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6BAC32C0AFE2100AD63A9 /* Observable.swift */; };
 		5BD6BAC72C0B012F00AD63A9 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6BAC62C0B012F00AD63A9 /* UIViewController+Additions.swift */; };
-		5BF8FC422C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8FC412C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift */; };
 		5BF8FC442C09CDB4003511D2 /* ContainerVC-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8FC432C09CDB4003511D2 /* ContainerVC-UB.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,9 +55,7 @@
 		0063E4D02BBEA5FD0086C0BA /* ShortsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsTableViewCell.swift; sourceTree = "<group>"; };
 		0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShortsFrameCollectionView.swift; sourceTree = "<group>"; };
 		00699E9A2BF32621007CF3CB /* ShortsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsCollectionViewCell.swift; sourceTree = "<group>"; };
-		0078092B2BFEE90100426C7D /* SubscribeVC-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscribeVC-UB.swift"; sourceTree = "<group>"; };
 		0078092F2BFEEBF200426C7D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		007809312C00521A00426C7D /* ButtonCollectionViewCell-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonCollectionViewCell-UB.swift"; sourceTree = "<group>"; };
 		007BB52E2BB93A0000431084 /* YoutubeViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		007BB5312BB93A0000431084 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		007BB5332BB93A0000431084 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,8 +75,6 @@
 		008551EE2BC15AB600DA3913 /* AddCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionView.swift; sourceTree = "<group>"; };
 		008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeSecItemView.swift; sourceTree = "<group>"; };
 		00867CDA2BFCE60700BCD369 /* STVWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STVWelcome.swift; sourceTree = "<group>"; };
-		008D38492C0242960014521F /* ShortsTableViewController-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortsTableViewController-UB.swift"; sourceTree = "<group>"; };
-		008D384B2C02E2FA0014521F /* BaseViewController-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseViewController-UB.swift"; sourceTree = "<group>"; };
 		00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsTableViewController.swift; sourceTree = "<group>"; };
 		00C3813C2BD948AC009A47AF /* SubscribeHoriCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeHoriCollectionView.swift; sourceTree = "<group>"; };
 		00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,7 +87,6 @@
 		00E63AB12BD015930019CB6D /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		5BD6BAC32C0AFE2100AD63A9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		5BD6BAC62C0B012F00AD63A9 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
-		5BF8FC412C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscribeHoriCollectionView﻿-﻿U﻿B.swift"; sourceTree = "<group>"; };
 		5BF8FC432C09CDB4003511D2 /* ContainerVC-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContainerVC-UB.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,11 +104,6 @@
 		007BB5252BB93A0000431084 = {
 			isa = PBXGroup;
 			children = (
-				5BF8FC412C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift */,
-				008D384B2C02E2FA0014521F /* BaseViewController-UB.swift */,
-				008D38492C0242960014521F /* ShortsTableViewController-UB.swift */,
-				0078092B2BFEE90100426C7D /* SubscribeVC-UB.swift */,
-				007809312C00521A00426C7D /* ButtonCollectionViewCell-UB.swift */,
 				5BF8FC432C09CDB4003511D2 /* ContainerVC-UB.swift */,
 				007BB5302BB93A0000431084 /* YoutubeViewController */,
 				007BB52F2BB93A0000431084 /* Products */,
@@ -331,13 +316,11 @@
 			files = (
 				007BB54A2BBAA1F200431084 /* VideoFrameView.swift in Sources */,
 				00219D762BD69AAE007AC84F /* NotificationTableViewCell.swift in Sources */,
-				0078092C2BFEE90200426C7D /* SubscribeVC-UB.swift in Sources */,
 				008551F22BC15C7D00DA3913 /* SubscribeSecItemView.swift in Sources */,
 				008551EC2BC13E1300DA3913 /* ShortsBtnView.swift in Sources */,
 				008551DF2BC0198100DA3913 /* AddVC.swift in Sources */,
 				008551DD2BC0196F00DA3913 /* ContentTableViewController.swift in Sources */,
 				008551D92BC0178500DA3913 /* MainTabBarController.swift in Sources */,
-				008D384C2C02E2FA0014521F /* BaseViewController-UB.swift in Sources */,
 				00C3813B2BD90E2D009A47AF /* ShortsTableViewController.swift in Sources */,
 				007BB5362BB93A0000431084 /* HomeVC.swift in Sources */,
 				007809302BFEEBF200426C7D /* BaseViewController.swift in Sources */,
@@ -350,10 +333,8 @@
 				007BB5482BB952F800431084 /* ButtonCollectionViewCell.swift in Sources */,
 				00219D702BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift in Sources */,
 				00E63AB02BD015840019CB6D /* NotificationLogVC.swift in Sources */,
-				008D384A2C0242960014521F /* ShortsTableViewController-UB.swift in Sources */,
 				007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */,
 				008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */,
-				5BF8FC422C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift in Sources */,
 				008551EA2BC1370900DA3913 /* ShortsEmojiBtnView.swift in Sources */,
 				00699E9B2BF32621007CF3CB /* ShortsCollectionViewCell.swift in Sources */,
 				00E63AB22BD015930019CB6D /* SearchVC.swift in Sources */,
@@ -367,7 +348,6 @@
 				0063E4D32BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift in Sources */,
 				00C381AF2BDFE721009A47AF /* SlideInTransition.swift in Sources */,
 				00C3814D2BDBB218009A47AF /* ContentTopView.swift in Sources */,
-				007809322C00521A00426C7D /* ButtonCollectionViewCell-UB.swift in Sources */,
 				00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
