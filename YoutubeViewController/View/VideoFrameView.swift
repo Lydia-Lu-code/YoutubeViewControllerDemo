@@ -96,7 +96,7 @@ class VideoFrameView: UIView {
         NSLayoutConstraint.activate([
             videoImgView.leadingAnchor.constraint(equalTo: self.leadingAnchor), // 與 VideoFrameView 的 leadingAnchor 對齊
             videoImgView.topAnchor.constraint(equalTo: self.topAnchor), // 與 VideoFrameView 的 topAnchor 對齊
-            videoImgView.widthAnchor.constraint(equalTo:videoImgView.heightAnchor, multiplier: 480/360), // 寬度與高度比例為 480:360
+            videoImgView.widthAnchor.constraint(equalTo:videoImgView.heightAnchor, multiplier: 320/180), // 寬度與高度比例為 480:360
             videoImgView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
         

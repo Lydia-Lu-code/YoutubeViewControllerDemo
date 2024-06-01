@@ -1,4 +1,4 @@
-//  ShortsTableViewController.swift
+////  ShortsTableViewController.swift
 //  YoutubeViewController
 //
 //  Created by Lydia Lu on 2024/4/24.
@@ -20,10 +20,15 @@ class ShortsTableViewController: UITableViewController {
         tableView.register(ShortsTableViewCell.self, forCellReuseIdentifier: "ShortsTableViewCell")
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         tableView.decelerationRate = .fast // 設置快速滑動減速
-        tableView.rowHeight = UIScreen.main.bounds.height
+        tableView.rowHeight = UIScreen.main.bounds.height // 將每個 cell 的高度設置為模擬器滿版畫面的高度
         tableView.delegate = self // 設置委託
         
         loadDataFromYouTubeAPI()
+        
+        // 隱藏或設置 navigationItem 為透明
+        navigationItem.title = "" // 將標題設置為空字符串
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +50,7 @@ class ShortsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShortsTableViewCell", for: indexPath) as! ShortsTableViewCell
-
+        
         cell.videoContent = videoContent
         cell.setupViews()
         
@@ -54,8 +59,8 @@ class ShortsTableViewController: UITableViewController {
             let item = showItems[indexPath.row]
             
             // 加載縮略圖
-            guard let url = URL(string: item.snippet.thumbnails.high.url) else {
-                print("STV無效的 URL 字符串: \(item.snippet.thumbnails.high.url)")
+            guard let url = URL(string: item.snippet.thumbnails.standard.url) else {
+                print("STV無效的 URL 字符串: \(item.snippet.thumbnails.standard.url)")
                 return cell
             }
             
@@ -73,12 +78,11 @@ class ShortsTableViewController: UITableViewController {
                     let backgroundImageView = UIImageView(image: image)
                     backgroundImageView.contentMode = .scaleAspectFill
                     backgroundImageView.clipsToBounds = true
+                    
                     cell.backgroundView = backgroundImageView
-
+                    
                     cell.shortsBtnView.accountButton.setTitle(item.snippet.channelID, for: .normal)
                     cell.shortsBtnView.txtLabel.text = item.snippet.title
-                    print("STV item.snippet.channelID == \(item.snippet.channelID)")
-                    print("STV item.snippet.title == \(item.snippet.title)")
                 }
                 
             }.resume()
@@ -86,10 +90,11 @@ class ShortsTableViewController: UITableViewController {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // 取得整個安全區域的高度
-        let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.size.height
-        return safeAreaHeight
+        // 取得整個屏幕的高度
+        let screenHeight = UIScreen.main.bounds.height
+        return screenHeight
     }
     
     // Overriding scroll view delegate method
@@ -103,34 +108,50 @@ class ShortsTableViewController: UITableViewController {
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             snapToNextCell()
+            alignCellToBottom()
         }
     }
     
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         snapToNextCell()
+        alignCellToBottom()
     }
     
-
-
+    private func alignCellToBottom() {
+        guard let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows else { return }
+        guard let lastVisibleIndexPath = indexPathsForVisibleRows.last else { return }
+        
+        tableView.scrollToRow(at: lastVisibleIndexPath, at: .bottom, animated: true)
+    }
     
     private func snapToNextCell() {
         let offsetY = tableView.contentOffset.y
         let cellHeight = UIScreen.main.bounds.height
         let currentIndex = Int(round(offsetY / cellHeight))
-        let nextIndex = (currentIndex + 1) % tableView.numberOfRows(inSection: 0)
+        let numberOfRows = tableView.numberOfRows(inSection: 0)
+        
+        // 確保表格視圖中有行數
+        guard numberOfRows > 0 else {
+            print("STV 錯誤: 表格視圖中沒有行。")
+            return
+        }
+        
+        let nextIndex = (currentIndex + 1) % numberOfRows
         let targetOffsetY = CGFloat(nextIndex) * cellHeight
+        
+        
         
         let indexPath = IndexPath(row: nextIndex, section: 0)
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
-    
 }
 
 extension ShortsTableViewController {
     
     func loadDataFromYouTubeAPI() {
-//        let apiKey = "AIzaSyCH3_SO6tdEh2XhWw4dEBi2WFDNA83MyMI"
+        
         let apiKey = ""
+//        let apiKey = "AIzaSyDC2moKhNm_ElfyiKoQeXKftoLHYzsWwWY" // 替換為你的 YouTube API 金鑰
         let baseURL = "https://www.googleapis.com/youtube/v3/videos"
         
         var components = URLComponents(string: baseURL)!
@@ -146,18 +167,17 @@ extension ShortsTableViewController {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard let data = data, error == nil else {
-                print("STV Error: \(String(describing: error))")
+                print("Error: \(String(describing: error))")
                 return
             }
             
-            print("STV API 請求成功。")
-            print(String(data: data, encoding: .utf8) ?? "STV 無法解析資料")
+            print("API request successful.")
             
             do {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 let searchResponse = try decoder.decode(STVWelcome.self, from: data)
-                print("STV JSON 解析成功。")
+                print("JSON decoding successful.")
                 
                 self.showItems = searchResponse.items // 將從 API 返回的項目存儲到 showItems 陣列中
                 self.itemCount = self.showItems.count // 更新項目數量
@@ -167,54 +187,12 @@ extension ShortsTableViewController {
                 }
                 
             } catch {
-                print("STV 解碼 JSON 失敗: \(error)")
+                print("JSON decoding failed: \(error)")
             }
             
         }
         
         task.resume()
     }
-
-    func loadDataShotsCell(with item: STVItem) {
-        DispatchQueue.main.async {
-            guard let indexPath = self.tableView.indexPathsForVisibleRows?.last else {
-                print("STV 表格視圖中無可見行。")
-                return
-            }
-            
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ShortsTableViewCell else {
-                print("STV無法獲取單元格。")
-                return
-            }
-            
-            guard let url = URL(string: item.snippet.thumbnails.high.url) else {
-                print("STV無效的 URL 字符串: \(item.snippet.thumbnails.high.url)")
-                return
-            }
-            
-            URLSession.shared.dataTask(with: url) { data, _, error in
-                if let error = error {
-                    print("STV加載圖片時出錯: \(error)")
-                    return
-                }
-                guard let data = data, let image = UIImage(data: data) else {
-                    print("STV無法從數據中提取圖片。")
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    let backgroundImageView = UIImageView(image: image)
-                    backgroundImageView.contentMode = .scaleAspectFill
-                    backgroundImageView.clipsToBounds = true
-                    cell.backgroundView = backgroundImageView
-
-                    cell.shortsBtnView.accountButton.setTitle(item.snippet.channelID, for: .normal)
-                    cell.shortsBtnView.txtLabel.text = item.snippet.title
-                }
-                
-            }.resume()
-        }
-    }
 }
-
 

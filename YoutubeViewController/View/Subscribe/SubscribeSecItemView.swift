@@ -11,7 +11,7 @@ class SubscribeSecItemView: UIView {
             let button = UIButton()
             button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.backgroundColor = .clear
+//            button.backgroundColor = .darkGray
             
             // 設置圖片的內容
             let originalImage = UIImage(named: "image2")
@@ -42,6 +42,7 @@ class SubscribeSecItemView: UIView {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsHorizontalScrollIndicator = false
+//        scrollView.backgroundColor = .darkGray
         return scrollView
     }()
     

@@ -5,7 +5,7 @@ import UIKit
 struct STVWelcome: Codable {
     let kind, etag: String
     let items: [STVItem]
-    let nextPageToken: String
+    let nextPageToken: String?
     let pageInfo: STVPageInfo
 }
 
@@ -13,8 +13,8 @@ struct STVWelcome: Codable {
 struct STVItem: Codable {
     let kind, etag, id: String
     let snippet: STVSnippet
-    let contentDetails: ContentDetails
-    let statistics: Statistics
+    let contentDetails: ContentDetails?
+    let statistics: Statistics?
 }
 
 // MARK: - ContentDetails
@@ -32,13 +32,16 @@ struct ContentRating: Codable {
 
 // MARK: - RegionRestriction
 struct RegionRestriction: Codable {
-    let blocked: [String]
+    let allowed: [String]?
+    let blocked: [String]?
 }
+
 
 // MARK: - Snippet
 struct STVSnippet: Codable {
     let publishedAt: Date
-    let channelID, title, description: String
+    let channelID, title: String
+    let description: String?
     let thumbnails: STVThumbnails
     let channelTitle: String
     let tags: [String]?
@@ -56,6 +59,7 @@ struct STVSnippet: Codable {
     }
 }
 
+
 // MARK: - Localized
 struct Localized: Codable {
     let title, description: String
@@ -64,7 +68,7 @@ struct Localized: Codable {
 // MARK: - Thumbnails
 struct STVThumbnails: Codable {
     let thumbnailsDefault, medium, high, standard: STVDefault
-    let maxres: STVDefault
+    let maxres: STVDefault?
 
     enum CodingKeys: String, CodingKey {
         case thumbnailsDefault = "default"
@@ -80,7 +84,7 @@ struct STVDefault: Codable {
 
 // MARK: - Statistics
 struct Statistics: Codable {
-    let viewCount, likeCount, favoriteCount, commentCount: String
+    let viewCount, likeCount, favoriteCount, commentCount: String?
 }
 
 // MARK: - PageInfo

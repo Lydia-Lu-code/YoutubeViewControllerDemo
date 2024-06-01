@@ -37,7 +37,7 @@ class ContentHeaderView: UIView {
 //        button.backgroundColor = .brown
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addTarget(self, action: #selector(turnPageAction), for: .touchUpInside)
+        button.addTarget(ContentHeaderView.self, action: #selector(turnPageAction), for: .touchUpInside)
         // 添加按鈕的其他設置...
         return button
     }()

@@ -10,12 +10,13 @@
 		00219D702BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00219D6F2BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift */; };
 		00219D722BD62DF7007AC84F /* NotificationCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00219D712BD62DF7007AC84F /* NotificationCustomView.swift */; };
 		00219D762BD69AAE007AC84F /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */; };
-		00254B452BEA5B52001B4041 /* VideoListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00254B442BEA5B52001B4041 /* VideoListResponse.swift */; };
+		00254B452BEA5B52001B4041 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00254B442BEA5B52001B4041 /* Welcome.swift */; };
 		0063E4D12BBEA5FD0086C0BA /* ShortsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D02BBEA5FD0086C0BA /* ShortsTableViewCell.swift */; };
 		0063E4D32BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */; };
-		00699E9B2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00699E9A2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift */; };
-		00699EE12BF74357007CF3CB /* ScrollViewSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00699EE02BF74357007CF3CB /* ScrollViewSubViewController.swift */; };
-		00699EE32BF748A9007CF3CB /* SubscribeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00699EE22BF748A9007CF3CB /* SubscribeCollectionViewCell.swift */; };
+		00699E9B2BF32621007CF3CB /* ShortsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00699E9A2BF32621007CF3CB /* ShortsCollectionViewCell.swift */; };
+		0078092C2BFEE90200426C7D /* SubscribeVC-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078092B2BFEE90100426C7D /* SubscribeVC-UB.swift */; };
+		007809302BFEEBF200426C7D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078092F2BFEEBF200426C7D /* BaseViewController.swift */; };
+		007809322C00521A00426C7D /* ButtonCollectionViewCell-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007809312C00521A00426C7D /* ButtonCollectionViewCell-UB.swift */; };
 		007BB5322BB93A0000431084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5312BB93A0000431084 /* AppDelegate.swift */; };
 		007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5332BB93A0000431084 /* SceneDelegate.swift */; };
 		007BB5362BB93A0000431084 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007BB5352BB93A0000431084 /* HomeVC.swift */; };
@@ -33,7 +34,8 @@
 		008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551EE2BC15AB600DA3913 /* AddCollectionView.swift */; };
 		008551F22BC15C7D00DA3913 /* SubscribeSecItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */; };
 		00867CDB2BFCE60700BCD369 /* STVWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00867CDA2BFCE60700BCD369 /* STVWelcome.swift */; };
-		00BE1C0D2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */; };
+		008D384A2C0242960014521F /* ShortsTableViewController-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008D38492C0242960014521F /* ShortsTableViewController-UB.swift */; };
+		008D384C2C02E2FA0014521F /* BaseViewController-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008D384B2C02E2FA0014521F /* BaseViewController-UB.swift */; };
 		00C3813B2BD90E2D009A47AF /* ShortsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */; };
 		00C3813D2BD948AC009A47AF /* SubscribeHoriCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3813C2BD948AC009A47AF /* SubscribeHoriCollectionView.swift */; };
 		00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */; };
@@ -44,18 +46,23 @@
 		00E63AA82BCCDAD00019CB6D /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AA72BCCDAD00019CB6D /* ContainerVC.swift */; };
 		00E63AB02BD015840019CB6D /* NotificationLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */; };
 		00E63AB22BD015930019CB6D /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E63AB12BD015930019CB6D /* SearchVC.swift */; };
+		5BD6BAC42C0AFE2100AD63A9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6BAC32C0AFE2100AD63A9 /* Observable.swift */; };
+		5BD6BAC72C0B012F00AD63A9 /* UIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6BAC62C0B012F00AD63A9 /* UIViewController+Additions.swift */; };
+		5BF8FC422C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8FC412C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift */; };
+		5BF8FC442C09CDB4003511D2 /* ContainerVC-UB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8FC432C09CDB4003511D2 /* ContainerVC-UB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00219D6F2BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTopButtonCollectionCell.swift; sourceTree = "<group>"; };
 		00219D712BD62DF7007AC84F /* NotificationCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCustomView.swift; sourceTree = "<group>"; };
 		00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
-		00254B442BEA5B52001B4041 /* VideoListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListResponse.swift; sourceTree = "<group>"; };
+		00254B442BEA5B52001B4041 /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		0063E4D02BBEA5FD0086C0BA /* ShortsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsTableViewCell.swift; sourceTree = "<group>"; };
 		0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShortsFrameCollectionView.swift; sourceTree = "<group>"; };
-		00699E9A2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShortsCollectionViewCell.swift; sourceTree = "<group>"; };
-		00699EE02BF74357007CF3CB /* ScrollViewSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewSubViewController.swift; sourceTree = "<group>"; };
-		00699EE22BF748A9007CF3CB /* SubscribeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeCollectionViewCell.swift; sourceTree = "<group>"; };
+		00699E9A2BF32621007CF3CB /* ShortsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsCollectionViewCell.swift; sourceTree = "<group>"; };
+		0078092B2BFEE90100426C7D /* SubscribeVC-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscribeVC-UB.swift"; sourceTree = "<group>"; };
+		0078092F2BFEEBF200426C7D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		007809312C00521A00426C7D /* ButtonCollectionViewCell-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonCollectionViewCell-UB.swift"; sourceTree = "<group>"; };
 		007BB52E2BB93A0000431084 /* YoutubeViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoutubeViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		007BB5312BB93A0000431084 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		007BB5332BB93A0000431084 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,8 +82,9 @@
 		008551EE2BC15AB600DA3913 /* AddCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionView.swift; sourceTree = "<group>"; };
 		008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeSecItemView.swift; sourceTree = "<group>"; };
 		00867CDA2BFCE60700BCD369 /* STVWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STVWelcome.swift; sourceTree = "<group>"; };
-		00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
-		00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortsTableViewController.swift; path = ../ShortsTableViewController.swift; sourceTree = "<group>"; };
+		008D38492C0242960014521F /* ShortsTableViewController-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShortsTableViewController-UB.swift"; sourceTree = "<group>"; };
+		008D384B2C02E2FA0014521F /* BaseViewController-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseViewController-UB.swift"; sourceTree = "<group>"; };
+		00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortsTableViewController.swift; sourceTree = "<group>"; };
 		00C3813C2BD948AC009A47AF /* SubscribeHoriCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeHoriCollectionView.swift; sourceTree = "<group>"; };
 		00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		00C3814A2BDBA9E6009A47AF /* ContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHeaderView.swift; sourceTree = "<group>"; };
@@ -86,6 +94,10 @@
 		00E63AA72BCCDAD00019CB6D /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationLogVC.swift; sourceTree = "<group>"; };
 		00E63AB12BD015930019CB6D /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		5BD6BAC32C0AFE2100AD63A9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		5BD6BAC62C0B012F00AD63A9 /* UIViewController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Additions.swift"; sourceTree = "<group>"; };
+		5BF8FC412C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscribeHoriCollectionView﻿-﻿U﻿B.swift"; sourceTree = "<group>"; };
+		5BF8FC432C09CDB4003511D2 /* ContainerVC-UB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContainerVC-UB.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +114,12 @@
 		007BB5252BB93A0000431084 = {
 			isa = PBXGroup;
 			children = (
-				00699EE22BF748A9007CF3CB /* SubscribeCollectionViewCell.swift */,
-				00699EE02BF74357007CF3CB /* ScrollViewSubViewController.swift */,
+				5BF8FC412C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift */,
+				008D384B2C02E2FA0014521F /* BaseViewController-UB.swift */,
+				008D38492C0242960014521F /* ShortsTableViewController-UB.swift */,
+				0078092B2BFEE90100426C7D /* SubscribeVC-UB.swift */,
+				007809312C00521A00426C7D /* ButtonCollectionViewCell-UB.swift */,
+				5BF8FC432C09CDB4003511D2 /* ContainerVC-UB.swift */,
 				007BB5302BB93A0000431084 /* YoutubeViewController */,
 				007BB52F2BB93A0000431084 /* Products */,
 			);
@@ -120,12 +136,10 @@
 		007BB5302BB93A0000431084 /* YoutubeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				007BB5312BB93A0000431084 /* AppDelegate.swift */,
-				007BB5332BB93A0000431084 /* SceneDelegate.swift */,
-				00254B442BEA5B52001B4041 /* VideoListResponse.swift */,
-				00867CDA2BFCE60700BCD369 /* STVWelcome.swift */,
+				5BD6BAC22C0AFE0E00AD63A9 /* Utilities */,
 				008551E22BC0F53F00DA3913 /* View */,
-				008551E32BC0F59900DA3913 /* Controller */,
+				00C381402BDB5B65009A47AF /* Model */,
+				008551E12BC0F52800DA3913 /* viewController */,
 				007BB5372BB93A0000431084 /* Main.storyboard */,
 				007BB53A2BB93A0800431084 /* Assets.xcassets */,
 				007BB53C2BB93A0800431084 /* LaunchScreen.storyboard */,
@@ -134,52 +148,52 @@
 			path = YoutubeViewController;
 			sourceTree = "<group>";
 		};
-		008551E12BC0F52800DA3913 /* Home */ = {
+		008551E12BC0F52800DA3913 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
-				0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */,
-				00699E9A2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift */,
-				00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */,
-				00BE1C0C2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift */,
-				00219D6F2BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift */,
-				00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */,
-				00219D712BD62DF7007AC84F /* NotificationCustomView.swift */,
-				00E63AB12BD015930019CB6D /* SearchVC.swift */,
-				007BB5492BBAA1F200431084 /* VideoFrameView.swift */,
-				007BB5472BB952F700431084 /* ButtonCollectionViewCell.swift */,
 				00E63AA72BCCDAD00019CB6D /* ContainerVC.swift */,
-				00E63AA52BCCDA4C0019CB6D /* MenuVC.swift */,
 			);
-			path = Home;
+			path = viewController;
 			sourceTree = "<group>";
 		};
 		008551E22BC0F53F00DA3913 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				007BB5332BB93A0000431084 /* SceneDelegate.swift */,
 				008551D82BC0178500DA3913 /* MainTabBarController.swift */,
-				00C381402BDB5B65009A47AF /* Content */,
-				008551E12BC0F52800DA3913 /* Home */,
-				008551E42BC0F68E00DA3913 /* Shorts */,
-				008551ED2BC15A3800DA3913 /* Add */,
-				008551F02BC15B6400DA3913 /* Subscribe */,
+				008D38512C0311830014521F /* Content */,
+				008D38502C0311550014521F /* Subscribe */,
+				008D384F2C03113E0014521F /* Add */,
+				008D384E2C0311280014521F /* Shorts */,
+				008D384D2C0311140014521F /* Home */,
+				007BB5352BB93A0000431084 /* HomeVC.swift */,
+				00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */,
+				008551DE2BC0198100DA3913 /* AddVC.swift */,
+				008551DA2BC0195D00DA3913 /* SubscribeVC.swift */,
+				008551DC2BC0196F00DA3913 /* ContentTableViewController.swift */,
+				00699E9A2BF32621007CF3CB /* ShortsCollectionViewCell.swift */,
+				007BB5492BBAA1F200431084 /* VideoFrameView.swift */,
+				007BB5472BB952F700431084 /* ButtonCollectionViewCell.swift */,
+				0078092F2BFEEBF200426C7D /* BaseViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		008551E32BC0F59900DA3913 /* Controller */ = {
+		008D384D2C0311140014521F /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				008551DC2BC0196F00DA3913 /* ContentTableViewController.swift */,
-				008551DA2BC0195D00DA3913 /* SubscribeVC.swift */,
-				008551DE2BC0198100DA3913 /* AddVC.swift */,
-				00C3813A2BD90E2D009A47AF /* ShortsTableViewController.swift */,
-				007BB5352BB93A0000431084 /* HomeVC.swift */,
-				00C381AE2BDFE721009A47AF /* SlideInTransition.swift */,
+				00E63AAF2BD015840019CB6D /* NotificationLogVC.swift */,
+				00E63AB12BD015930019CB6D /* SearchVC.swift */,
+				00E63AA52BCCDA4C0019CB6D /* MenuVC.swift */,
+				0063E4D22BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift */,
+				00219D6F2BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift */,
+				00219D752BD69AAE007AC84F /* NotificationTableViewCell.swift */,
+				00219D712BD62DF7007AC84F /* NotificationCustomView.swift */,
 			);
-			path = Controller;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		008551E42BC0F68E00DA3913 /* Shorts */ = {
+		008D384E2C0311280014521F /* Shorts */ = {
 			isa = PBXGroup;
 			children = (
 				008551EB2BC13E1300DA3913 /* ShortsBtnView.swift */,
@@ -189,7 +203,7 @@
 			path = Shorts;
 			sourceTree = "<group>";
 		};
-		008551ED2BC15A3800DA3913 /* Add */ = {
+		008D384F2C03113E0014521F /* Add */ = {
 			isa = PBXGroup;
 			children = (
 				008551EE2BC15AB600DA3913 /* AddCollectionView.swift */,
@@ -197,7 +211,7 @@
 			path = Add;
 			sourceTree = "<group>";
 		};
-		008551F02BC15B6400DA3913 /* Subscribe */ = {
+		008D38502C0311550014521F /* Subscribe */ = {
 			isa = PBXGroup;
 			children = (
 				008551F12BC15C7D00DA3913 /* SubscribeSecItemView.swift */,
@@ -206,7 +220,7 @@
 			path = Subscribe;
 			sourceTree = "<group>";
 		};
-		00C381402BDB5B65009A47AF /* Content */ = {
+		008D38512C0311830014521F /* Content */ = {
 			isa = PBXGroup;
 			children = (
 				00C381412BDB5BB1009A47AF /* ContentTableViewCell.swift */,
@@ -214,6 +228,34 @@
 				00C3814C2BDBB218009A47AF /* ContentTopView.swift */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		00C381402BDB5B65009A47AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00254B442BEA5B52001B4041 /* Welcome.swift */,
+				00867CDA2BFCE60700BCD369 /* STVWelcome.swift */,
+				007BB5312BB93A0000431084 /* AppDelegate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5BD6BAC22C0AFE0E00AD63A9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				5BD6BAC52C0B011A00AD63A9 /* Additions */,
+				5BD6BAC32C0AFE2100AD63A9 /* Observable.swift */,
+				00C381AE2BDFE721009A47AF /* SlideInTransition.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5BD6BAC52C0B011A00AD63A9 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				5BD6BAC62C0B012F00AD63A9 /* UIViewController+Additions.swift */,
+			);
+			path = Additions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,31 +329,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00BE1C0D2BEBD6E900756D5B /* UIBarButtonItem+Extension.swift in Sources */,
 				007BB54A2BBAA1F200431084 /* VideoFrameView.swift in Sources */,
 				00219D762BD69AAE007AC84F /* NotificationTableViewCell.swift in Sources */,
+				0078092C2BFEE90200426C7D /* SubscribeVC-UB.swift in Sources */,
 				008551F22BC15C7D00DA3913 /* SubscribeSecItemView.swift in Sources */,
 				008551EC2BC13E1300DA3913 /* ShortsBtnView.swift in Sources */,
 				008551DF2BC0198100DA3913 /* AddVC.swift in Sources */,
 				008551DD2BC0196F00DA3913 /* ContentTableViewController.swift in Sources */,
 				008551D92BC0178500DA3913 /* MainTabBarController.swift in Sources */,
+				008D384C2C02E2FA0014521F /* BaseViewController-UB.swift in Sources */,
 				00C3813B2BD90E2D009A47AF /* ShortsTableViewController.swift in Sources */,
 				007BB5362BB93A0000431084 /* HomeVC.swift in Sources */,
+				007809302BFEEBF200426C7D /* BaseViewController.swift in Sources */,
 				00867CDB2BFCE60700BCD369 /* STVWelcome.swift in Sources */,
+				5BD6BAC42C0AFE2100AD63A9 /* Observable.swift in Sources */,
 				00E63AA62BCCDA4C0019CB6D /* MenuVC.swift in Sources */,
 				00219D722BD62DF7007AC84F /* NotificationCustomView.swift in Sources */,
+				5BF8FC442C09CDB4003511D2 /* ContainerVC-UB.swift in Sources */,
 				007BB5322BB93A0000431084 /* AppDelegate.swift in Sources */,
 				007BB5482BB952F800431084 /* ButtonCollectionViewCell.swift in Sources */,
 				00219D702BD624BC007AC84F /* NotificationTopButtonCollectionCell.swift in Sources */,
 				00E63AB02BD015840019CB6D /* NotificationLogVC.swift in Sources */,
+				008D384A2C0242960014521F /* ShortsTableViewController-UB.swift in Sources */,
 				007BB5342BB93A0000431084 /* SceneDelegate.swift in Sources */,
-				00699EE32BF748A9007CF3CB /* SubscribeCollectionViewCell.swift in Sources */,
 				008551EF2BC15AB600DA3913 /* AddCollectionView.swift in Sources */,
+				5BF8FC422C09ABE2003511D2 /* SubscribeHoriCollectionView﻿-﻿U﻿B.swift in Sources */,
 				008551EA2BC1370900DA3913 /* ShortsEmojiBtnView.swift in Sources */,
-				00699E9B2BF32621007CF3CB /* HomeShortsCollectionViewCell.swift in Sources */,
-				00699EE12BF74357007CF3CB /* ScrollViewSubViewController.swift in Sources */,
+				00699E9B2BF32621007CF3CB /* ShortsCollectionViewCell.swift in Sources */,
 				00E63AB22BD015930019CB6D /* SearchVC.swift in Sources */,
-				00254B452BEA5B52001B4041 /* VideoListResponse.swift in Sources */,
+				5BD6BAC72C0B012F00AD63A9 /* UIViewController+Additions.swift in Sources */,
+				00254B452BEA5B52001B4041 /* Welcome.swift in Sources */,
 				008551DB2BC0195D00DA3913 /* SubscribeVC.swift in Sources */,
 				00E63AA82BCCDAD00019CB6D /* ContainerVC.swift in Sources */,
 				00C3814B2BDBA9E6009A47AF /* ContentHeaderView.swift in Sources */,
@@ -320,6 +367,7 @@
 				0063E4D32BBEAE5D0086C0BA /* HomeShortsFrameCollectionView.swift in Sources */,
 				00C381AF2BDFE721009A47AF /* SlideInTransition.swift in Sources */,
 				00C3814D2BDBB218009A47AF /* ContentTopView.swift in Sources */,
+				007809322C00521A00426C7D /* ButtonCollectionViewCell-UB.swift in Sources */,
 				00C381422BDB5BB1009A47AF /* ContentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

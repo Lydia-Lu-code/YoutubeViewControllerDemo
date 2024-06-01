@@ -1,9 +1,3 @@
-//
-//  ShortsViewController.swift
-//  YoutubeViewController
-//
-//  Created by Lydia Lu on 2024/4/4.
-//
 
 import UIKit
 
@@ -17,7 +11,6 @@ class ShortsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setupViews()
     }
 
@@ -60,3 +53,7 @@ func setupViews() {
     
 
 }
+
+
+
+
